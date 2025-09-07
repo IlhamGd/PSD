@@ -6,8 +6,9 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index &#8212; My sample book</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>MEMAHAMI DATA - Iris &#8212; My sample book</title>
   
   
   
@@ -56,8 +57,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'genindex';</script>
-    <link rel="index" title="Index" href="#" />
+    <script>DOCUMENTATION_OPTIONS.pagename = 'memahami data';</script>
+    <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -252,7 +253,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fgenindex.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fmemahami data.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -264,6 +265,54 @@
   </span>
 <span class="btn__text-container">Open issue</span>
 </a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/memahami data.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
 </li>
       
   </ul>
@@ -305,7 +354,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -316,11 +367,28 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1></h1>
+    <h1>MEMAHAMI DATA - Iris</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struktur-dataset">Struktur Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistik-deskriptif">Statistik Deskriptif</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jumlah-setiap-kelas">Jumlah Setiap Kelas</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-grafik-distribusi-fitur">Penjelasan Grafik Distribusi Fitur</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -330,13 +398,110 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
+  <section class="tex2jax_ignore mathjax_ignore" id="memahami-data-iris">
+<h1>MEMAHAMI DATA - Iris<a class="headerlink" href="#memahami-data-iris" title="Link to this heading">#</a></h1>
+<section id="struktur-dataset">
+<h2>Struktur Dataset<a class="headerlink" href="#struktur-dataset" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Jumlah baris</strong> : 150</p></li>
+<li><p><strong>Jumlah kolom</strong> : 5</p></li>
+<li><p><strong>Kolom dan tipe data</strong> :</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> → Decimal Number (cm)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sepal_width</span></code>  → Decimal Number (cm)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">petal_length</span></code> → Decimal Number (cm)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">petal_width</span></code>  → Decimal Number (cm)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">species</span></code>      → Text (kategori: setosa, versicolor, virginica)</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id1">
+<h2><img alt="image.png" src="attachment:image.png" /><a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+</section>
+<section id="statistik-deskriptif">
+<h2>Statistik Deskriptif<a class="headerlink" href="#statistik-deskriptif" title="Link to this heading">#</a></h2>
+<p>Hasil eksplorasi awal menunjukkan:</p>
+<ul class="simple">
+<li><p><strong>Sepal Length</strong> : min = 4.3</p></li>
+<li><p><strong>Sepal Width</strong>  : min = 2.0</p></li>
+<li><p><strong>Petal Length</strong> : min = 1.0</p></li>
+<li><p><strong>Petal Width</strong>  : min = 0.1</p></li>
+</ul>
+<p>Nilai minimum ini menunjukkan batas bawah ukuran setiap fitur. Terlihat bahwa bunga Iris-setosa memiliki ukuran petal yang paling kecil dibandingkan kelas lainnya.</p>
+</section>
+<section id="id2">
+<h2><img alt="image-4.png" src="attachment:image-4.png" /><a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Sepal Length</strong> :  max = 7.9</p></li>
+<li><p><strong>Sepal Width</strong>  :  max = 4.4</p></li>
+<li><p><strong>Petal Length</strong> :  max = 6.9</p></li>
+<li><p><strong>Petal Width</strong>  :  max = 2.5</p></li>
+</ul>
+<p>Bunga Iris-virginica cenderung memiliki ukuran paling besar untuk petal dan sepal length, sedangkan Iris-setosa unggul di sepal width.</p>
+</section>
+<section id="id3">
+<h2><img alt="image-3.png" src="attachment:image-3.png" /><a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>Grafik batang dibawah menunjukkan perbandingan 4 ukuran rata-rata (panjang &amp; lebar kelopak/sepal dan mahkota/petal) untuk setiap kelas bunga.</p>
+<ul class="simple">
+<li><p><strong>Iris-virginica</strong></p>
+<ul>
+<li><p>Memiliki <strong>panjang kelopak (sepal length) rata-rata paling panjang</strong>.</p></li>
+<li><p>Memiliki <strong>panjang mahkota (petal length) rata-rata paling panjang</strong>.</p></li>
+<li><p>Ukurannya secara umum adalah yang terbesar di antara ketiganya.</p></li>
+</ul>
+</li>
+<li><p><strong>Iris-setosa</strong></p>
+<ul>
+<li><p>Sangat unik dan mudah dibedakan.</p></li>
+<li><p>Memiliki <strong>lebar kelopak (sepal width) rata-rata paling lebar</strong>.</p></li>
+<li><p>Namun, memiliki <strong>panjang mahkota (petal length) dan lebar mahkota (petal width) yang paling pendek dan paling sempit</strong> secara signifikan.</p></li>
+</ul>
+</li>
+<li><p><strong>Iris-versicolor</strong></p>
+<ul>
+<li><p>Ciri-cirinya berada <strong>di tengah-tengah</strong> antara Virginica dan Setosa untuk semua kategori ukuran.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id4">
+<h2><img alt="image-2.png" src="attachment:image-2.png" /><a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+</section>
+<section id="jumlah-setiap-kelas">
+<h2>Jumlah Setiap Kelas<a class="headerlink" href="#jumlah-setiap-kelas" title="Link to this heading">#</a></h2>
+<section id="penjelasan-grafik-distribusi-fitur">
+<h3>Penjelasan Grafik Distribusi Fitur<a class="headerlink" href="#penjelasan-grafik-distribusi-fitur" title="Link to this heading">#</a></h3>
+<p>Grafik menunjukkan perbandingan jumlah data antara dua fitur
+(panjang dan lebar kelopak) dalam setiap kelas.</p>
+<p>Hasilnya selalu <strong>50% berbanding 50%</strong> karena setiap bunga
+pasti memiliki satu nilai panjang dan satu nilai lebar.</p>
+<p>Dengan demikian, jumlahnya selalu sama untuk setiap kelas,
+sehingga porsinya menjadi seimbang.</p>
+<p><img alt="image-5.png" src="attachment:image-5.png" /></p>
+</section>
+</section>
+</section>
 
-<h1 id="index">Index</h1>
-
-<div class="genindex-jumpbox">
- 
-</div>
-
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               
@@ -354,6 +519,30 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struktur-dataset">Struktur Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistik-deskriptif">Statistik Deskriptif</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jumlah-setiap-kelas">Jumlah Setiap Kelas</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-grafik-distribusi-fitur">Penjelasan Grafik Distribusi Fitur</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
