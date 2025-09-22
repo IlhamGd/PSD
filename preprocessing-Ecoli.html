@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Preprocessing - Balancing Data &#8212; My sample book</title>
+    <title>PREPROCESSING - Ecoli &#8212; My sample book</title>
   
   
   
@@ -182,7 +182,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Bussines%20Understanding.html"><strong>Business Understanding</strong> - Dataset Iris</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Data_Understanding_Iris.html"><strong>DATA UNDERSTANDING</strong> - Iris</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="preprocessing.html"><strong>PREPROCESSING</strong> - Iris</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Preprocessing - Balancing Data</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#"><strong>PREPROCESSING</strong> - Ecoli</a></li>
 </ul>
 </details></li>
 </ul>
@@ -370,7 +370,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Preprocessing - Balancing Data</h1>
+    <h1>PREPROCESSING - Ecoli</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -380,10 +380,20 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengambil-data-dari-mysql">Mengambil data dari MySql</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menampilkan-pca">Menampilkan PCA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kriteria-tugas">Kriteria Tugas :</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simpan-didatabase-mysql">Simpan didatabase MySQL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tampilkan-data-dalam-scatter-plot-menggunakan-pca-pca-mentransformasi-data-menjadi-dimensi-rendah-2">Tampilkan data dalam scatter plot  menggunakan PCA. PCA mentransformasi data menjadi dimensi rendah (2)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#smote">SMOTE</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#penyeimbangan-menggunakan-smote">Penyeimbangan menggunakan Smote</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-menggunakan-smote">Visualisasi Menggunakan Smote</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adasyn">ADASYN</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#penyeimbangan-data-menggunakan-adasyn">Penyeimbangan data menggunakan ADASYN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-adasyn-menggunakan-pca">Visualisasi ADASYN menggunakan PCA</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ploting-data-dari-data-yang-diimbangkan-menggunakan-pca-tandai-data-data-hasil-generatenya">Ploting data dari data yang diimbangkan menggunakan PCA, tandai data data hasil generatenya</a></li>
 </ul>
             </nav>
         </div>
@@ -395,9 +405,10 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="preprocessing-balancing-data">
-<h1>Preprocessing - Balancing Data<a class="headerlink" href="#preprocessing-balancing-data" title="Link to this heading">#</a></h1>
-<p>Kriteria Tugas :</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="preprocessing-ecoli">
+<h1><strong>PREPROCESSING</strong> - Ecoli<a class="headerlink" href="#preprocessing-ecoli" title="Link to this heading">#</a></h1>
+<section id="kriteria-tugas">
+<h2>Kriteria Tugas :<a class="headerlink" href="#kriteria-tugas" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Download dataset ecoli dari UCI <a class="reference external" href="https://archive.ics.uci.edu/dataset/39/ecoli">https://archive.ics.uci.edu/dataset/39/ecoli</a></p></li>
 <li><p>Simpan didatabase MySQL</p></li>
@@ -407,8 +418,9 @@ PCA mentransformasi data menjadi dimensi rendah (2)</p></li>
 <li><p>Ploting data dari data yang diimbangkan menggunakan PCA, tandai data data hasil generatenya</p></li>
 </ol>
 <p>Penjelasan lebih lengkap mengenai Oversampling : <a class="reference external" href="https://hackmd.io/&#64;ProyekSaindData/BJE4Lopsee">https://hackmd.io/&#64;ProyekSaindData/BJE4Lopsee</a></p>
-<section id="mengambil-data-dari-mysql">
-<h2>Mengambil data dari MySql<a class="headerlink" href="#mengambil-data-dari-mysql" title="Link to this heading">#</a></h2>
+</section>
+<section id="simpan-didatabase-mysql">
+<h2>Simpan didatabase MySQL<a class="headerlink" href="#simpan-didatabase-mysql" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>pymysql
@@ -468,8 +480,9 @@ PCA mentransformasi data menjadi dimensi rendah (2)</p></li>
 </div>
 </div>
 </div>
-<section id="menampilkan-pca">
-<h3>Menampilkan PCA<a class="headerlink" href="#menampilkan-pca" title="Link to this heading">#</a></h3>
+</section>
+<section id="tampilkan-data-dalam-scatter-plot-menggunakan-pca-pca-mentransformasi-data-menjadi-dimensi-rendah-2">
+<h2>Tampilkan data dalam scatter plot  menggunakan PCA. PCA mentransformasi data menjadi dimensi rendah (2)<a class="headerlink" href="#tampilkan-data-dalam-scatter-plot-menggunakan-pca-pca-mentransformasi-data-menjadi-dimensi-rendah-2" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pymysql</span>
@@ -526,14 +539,326 @@ PCA mentransformasi data menjadi dimensi rendah (2)</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_5562/622454543.py:25: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2846/622454543.py:25: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
   df = pd.read_sql(query, mysql_conn)
 </pre></div>
 </div>
 <img alt="_images/a36633058013f7d58ee9cb4e8f4bfc1e93987ef898e2f87b70e5fb3f474a8702.png" src="_images/a36633058013f7d58ee9cb4e8f4bfc1e93987ef898e2f87b70e5fb3f474a8702.png" />
 </div>
 </div>
+<p>Install terlebih dulu library pendukung</p>
+<p><code class="docutils literal notranslate"><span class="pre">!pip</span> <span class="pre">install</span> <span class="pre">imbalanced-learn</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>imbalanced-learn
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting imbalanced-learn
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading imbalanced_learn-0.14.0-py3-none-any.whl.metadata (8.8 kB)
+Requirement already satisfied: numpy&lt;3,&gt;=1.25.2 in /home/codespace/.local/lib/python3.12/site-packages (from imbalanced-learn) (2.3.1)
+Requirement already satisfied: scipy&lt;2,&gt;=1.11.4 in /home/codespace/.local/lib/python3.12/site-packages (from imbalanced-learn) (1.16.0)
+Requirement already satisfied: scikit-learn&lt;2,&gt;=1.4.2 in /home/codespace/.local/lib/python3.12/site-packages (from imbalanced-learn) (1.7.0)
+Requirement already satisfied: joblib&lt;2,&gt;=1.2.0 in /home/codespace/.local/lib/python3.12/site-packages (from imbalanced-learn) (1.5.1)
+Requirement already satisfied: threadpoolctl&lt;4,&gt;=2.0.0 in /home/codespace/.local/lib/python3.12/site-packages (from imbalanced-learn) (3.6.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading imbalanced_learn-0.14.0-py3-none-any.whl (239 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: imbalanced-learn
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully installed imbalanced-learn-0.14.0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">25.1.1</span> -&gt; <span class=" -Color -Color-Green">25.2</span>
+<span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> To update, run: <span class=" -Color -Color-Green">python3 -m pip install --upgrade pip</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
+<section id="smote">
+<h2>SMOTE<a class="headerlink" href="#smote" title="Link to this heading">#</a></h2>
+<section id="penyeimbangan-menggunakan-smote">
+<h3>Penyeimbangan menggunakan Smote<a class="headerlink" href="#penyeimbangan-menggunakan-smote" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">imblearn.over_sampling</span><span class="w"> </span><span class="kn">import</span> <span class="n">SMOTE</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="c1"># Misalnya df sudah ada (hasil query MySQL)</span>
+<span class="c1"># Target = kolom &#39;class&#39;, fitur = selain &#39;Sequence&#39; &amp; &#39;class&#39;</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Sequence&quot;</span><span class="p">,</span> <span class="s2">&quot;class&quot;</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">]</span>
+
+<span class="c1"># Pastikan semua fitur numerik</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;coerce&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Distribusi awal</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Distribusi awal:&quot;</span><span class="p">,</span> <span class="n">Counter</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+
+<span class="n">smote</span> <span class="o">=</span> <span class="n">SMOTE</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">k_neighbors</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># important: k_neighbors &lt;= number of samples in minority class</span>
+<span class="n">X_res</span><span class="p">,</span> <span class="n">y_res</span> <span class="o">=</span> <span class="n">smote</span><span class="o">.</span><span class="n">fit_resample</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Distribusi setelah SMOTE</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Distribusi setelah SMOTE:&quot;</span><span class="p">,</span> <span class="n">Counter</span><span class="p">(</span><span class="n">y_res</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Distribusi awal: Counter({&#39;cp&#39;: 143, &#39;im&#39;: 77, &#39;pp&#39;: 52, &#39;imU&#39;: 35, &#39;om&#39;: 20, &#39;omL&#39;: 5, &#39;imS&#39;: 2, &#39;imL&#39;: 2})
+Distribusi setelah SMOTE: Counter({&#39;im&#39;: 143, &#39;cp&#39;: 143, &#39;pp&#39;: 143, &#39;imU&#39;: 143, &#39;imS&#39;: 143, &#39;om&#39;: 143, &#39;imL&#39;: 143, &#39;omL&#39;: 143})
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualisasi-menggunakan-smote">
+<h3>Visualisasi Menggunakan Smote<a class="headerlink" href="#visualisasi-menggunakan-smote" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">imblearn.over_sampling</span><span class="w"> </span><span class="kn">import</span> <span class="n">SMOTE</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Misalnya df sudah ada (hasil query MySQL)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Sequence&quot;</span><span class="p">,</span> <span class="s2">&quot;class&quot;</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">]</span>
+
+<span class="c1"># Pastikan numerik</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;coerce&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Distribusi awal</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Distribusi awal:&quot;</span><span class="p">,</span> <span class="n">Counter</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+
+<span class="c1"># --- SMOTE ---</span>
+<span class="n">smote</span> <span class="o">=</span> <span class="n">SMOTE</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">k_neighbors</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># k_neighbors disesuaikan dataset</span>
+<span class="n">X_res</span><span class="p">,</span> <span class="n">y_res</span> <span class="o">=</span> <span class="n">smote</span><span class="o">.</span><span class="n">fit_resample</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Distribusi setelah SMOTE:&quot;</span><span class="p">,</span> <span class="n">Counter</span><span class="p">(</span><span class="n">y_res</span><span class="p">))</span>
+
+<span class="c1"># --- PCA untuk visualisasi ---</span>
+<span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">X_pca_before</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">X_pca_after</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_res</span><span class="p">)</span>
+
+<span class="c1"># --- Plot sebelum SMOTE ---</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+    <span class="n">subset</span> <span class="o">=</span> <span class="n">X_pca_before</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">==</span><span class="n">c</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">subset</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">subset</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Sebelum SMOTE&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;PC1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;PC2&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># --- Plot sesudah SMOTE ---</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">y_res</span><span class="p">)</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+    <span class="n">subset</span> <span class="o">=</span> <span class="n">X_pca_after</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">y_res</span><span class="p">)</span><span class="o">==</span><span class="n">c</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">subset</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">subset</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Sesudah SMOTE&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;PC1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;PC2&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Distribusi awal: Counter({&#39;cp&#39;: 143, &#39;im&#39;: 77, &#39;pp&#39;: 52, &#39;imU&#39;: 35, &#39;om&#39;: 20, &#39;omL&#39;: 5, &#39;imS&#39;: 2, &#39;imL&#39;: 2})
+Distribusi setelah SMOTE: Counter({&#39;im&#39;: 143, &#39;cp&#39;: 143, &#39;pp&#39;: 143, &#39;imU&#39;: 143, &#39;imS&#39;: 143, &#39;om&#39;: 143, &#39;imL&#39;: 143, &#39;omL&#39;: 143})
+</pre></div>
+</div>
+<img alt="_images/455352dd30112253b66232d9d734c061d161495faf958ce757cb73444de2021b.png" src="_images/455352dd30112253b66232d9d734c061d161495faf958ce757cb73444de2021b.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="adasyn">
+<h2>ADASYN<a class="headerlink" href="#adasyn" title="Link to this heading">#</a></h2>
+<section id="penyeimbangan-data-menggunakan-adasyn">
+<h3>Penyeimbangan data menggunakan ADASYN<a class="headerlink" href="#penyeimbangan-data-menggunakan-adasyn" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">imblearn.over_sampling</span><span class="w"> </span><span class="kn">import</span> <span class="n">ADASYN</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="c1"># Data preparation</span>
+<span class="n">nt</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">ns</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Distribusi awal:&quot;</span><span class="p">,</span> <span class="n">Counter</span><span class="p">(</span><span class="n">ns</span><span class="p">))</span>
+
+<span class="n">class_counts</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">ns</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Class counts:&quot;</span><span class="p">,</span> <span class="n">class_counts</span><span class="p">)</span>
+
+<span class="c1"># Urutkan kelas dari yang paling sedikit ke paling banyak</span>
+<span class="n">sorted_classes</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">class_counts</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sorted classes by count:&quot;</span><span class="p">,</span> <span class="n">sorted_classes</span><span class="p">)</span>
+
+<span class="c1"># Coba ADASYN bertahap untuk kelas minoritas</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sorted_classes</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>  <span class="c1"># Skip kelas mayoritas</span>
+    <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># Hanya untuk kelas dengan cukup samples</span>
+        <span class="n">n_neighbors</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">count</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Pastikan n_neighbors aman</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">📊 Processing class &#39;</span><span class="si">{</span><span class="bp">cls</span><span class="si">}</span><span class="s2">&#39; (count: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2">) with n_neighbors=</span><span class="si">{</span><span class="n">n_neighbors</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">adasyn</span> <span class="o">=</span> <span class="n">ADASYN</span><span class="p">(</span>
+                <span class="n">n_neighbors</span><span class="o">=</span><span class="n">n_neighbors</span><span class="p">,</span>
+                <span class="n">sampling_strategy</span><span class="o">=</span><span class="p">{</span><span class="bp">cls</span><span class="p">:</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">10</span><span class="p">}</span>  <span class="c1"># Naikkan 10 sampel</span>
+            <span class="p">)</span>
+            <span class="n">nt</span><span class="p">,</span> <span class="n">ns</span> <span class="o">=</span> <span class="n">adasyn</span><span class="o">.</span><span class="n">fit_resample</span><span class="p">(</span><span class="n">nt</span><span class="p">,</span> <span class="n">ns</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Success for class &#39;</span><span class="si">{</span><span class="bp">cls</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   New distribution: </span><span class="si">{</span><span class="n">Counter</span><span class="p">(</span><span class="n">ns</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Failed for class &#39;</span><span class="si">{</span><span class="bp">cls</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">continue</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🎯 Final distribution: </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">Counter</span><span class="p">(</span><span class="n">ns</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Distribusi awal: Counter({&#39;cp&#39;: 143, &#39;im&#39;: 77, &#39;pp&#39;: 52, &#39;imU&#39;: 35, &#39;om&#39;: 20, &#39;omL&#39;: 5, &#39;imS&#39;: 2, &#39;imL&#39;: 2})
+Class counts: Counter({&#39;cp&#39;: 143, &#39;im&#39;: 77, &#39;pp&#39;: 52, &#39;imU&#39;: 35, &#39;om&#39;: 20, &#39;omL&#39;: 5, &#39;imS&#39;: 2, &#39;imL&#39;: 2})
+Sorted classes by count: [(&#39;imS&#39;, 2), (&#39;imL&#39;, 2), (&#39;omL&#39;, 5), (&#39;om&#39;, 20), (&#39;imU&#39;, 35), (&#39;pp&#39;, 52), (&#39;im&#39;, 77), (&#39;cp&#39;, 143)]
+
+📊 Processing class &#39;imS&#39; (count: 2) with n_neighbors=1
+✅ Success for class &#39;imS&#39;
+   New distribution: Counter({&#39;cp&#39;: 143, &#39;im&#39;: 77, &#39;pp&#39;: 52, &#39;imU&#39;: 35, &#39;om&#39;: 20, &#39;imS&#39;: 12, &#39;omL&#39;: 5, &#39;imL&#39;: 2})
+
+📊 Processing class &#39;imL&#39; (count: 2) with n_neighbors=1
+✅ Success for class &#39;imL&#39;
+   New distribution: Counter({&#39;cp&#39;: 143, &#39;im&#39;: 77, &#39;pp&#39;: 52, &#39;imU&#39;: 35, &#39;om&#39;: 20, &#39;imS&#39;: 12, &#39;imL&#39;: 12, &#39;omL&#39;: 5})
+
+📊 Processing class &#39;omL&#39; (count: 5) with n_neighbors=4
+✅ Success for class &#39;omL&#39;
+   New distribution: Counter({&#39;cp&#39;: 143, &#39;im&#39;: 77, &#39;pp&#39;: 52, &#39;imU&#39;: 35, &#39;om&#39;: 20, &#39;omL&#39;: 15, &#39;imS&#39;: 12, &#39;imL&#39;: 12})
+
+📊 Processing class &#39;om&#39; (count: 20) with n_neighbors=5
+✅ Success for class &#39;om&#39;
+   New distribution: Counter({&#39;cp&#39;: 143, &#39;im&#39;: 77, &#39;pp&#39;: 52, &#39;imU&#39;: 35, &#39;om&#39;: 29, &#39;omL&#39;: 15, &#39;imS&#39;: 12, &#39;imL&#39;: 12})
+
+📊 Processing class &#39;imU&#39; (count: 35) with n_neighbors=5
+✅ Success for class &#39;imU&#39;
+   New distribution: Counter({&#39;cp&#39;: 143, &#39;im&#39;: 77, &#39;pp&#39;: 52, &#39;imU&#39;: 38, &#39;om&#39;: 29, &#39;omL&#39;: 15, &#39;imS&#39;: 12, &#39;imL&#39;: 12})
+
+📊 Processing class &#39;pp&#39; (count: 52) with n_neighbors=5
+✅ Success for class &#39;pp&#39;
+   New distribution: Counter({&#39;cp&#39;: 143, &#39;im&#39;: 77, &#39;pp&#39;: 59, &#39;imU&#39;: 38, &#39;om&#39;: 29, &#39;omL&#39;: 15, &#39;imS&#39;: 12, &#39;imL&#39;: 12})
+
+📊 Processing class &#39;im&#39; (count: 77) with n_neighbors=5
+❌ Failed for class &#39;im&#39;: No samples will be generated with the provided ratio settings.
+
+🎯 Final distribution: [(&#39;cp&#39;, 143), (&#39;im&#39;, 77), (&#39;imL&#39;, 12), (&#39;imS&#39;, 12), (&#39;imU&#39;, 38), (&#39;om&#39;, 29), (&#39;omL&#39;, 15), (&#39;pp&#39;, 59)]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualisasi-adasyn-menggunakan-pca">
+<h3>Visualisasi ADASYN menggunakan PCA<a class="headerlink" href="#visualisasi-adasyn-menggunakan-pca" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
+
+<span class="c1"># --- Setelah ADASYN selesai ---</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🎯 Final distribution: </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">Counter</span><span class="p">(</span><span class="n">ns</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># PCA ke 2 dimensi</span>
+<span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">X_pca</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">nt</span><span class="p">)</span>
+
+<span class="c1"># Buat DataFrame hasil PCA untuk plotting</span>
+<span class="n">df_pca</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_pca</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;PC1&quot;</span><span class="p">,</span> <span class="s2">&quot;PC2&quot;</span><span class="p">])</span>
+<span class="n">df_pca</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ns</span><span class="o">.</span><span class="n">values</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="k">else</span> <span class="n">ns</span>  <span class="c1"># pastikan ns bisa dipakai</span>
+
+<span class="c1"># Scatter plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">df_pca</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+    <span class="n">subset</span> <span class="o">=</span> <span class="n">df_pca</span><span class="p">[</span><span class="n">df_pca</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">c</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">subset</span><span class="p">[</span><span class="s2">&quot;PC1&quot;</span><span class="p">],</span> <span class="n">subset</span><span class="p">[</span><span class="s2">&quot;PC2&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;PCA Scatter Plot setelah ADASYN&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Principal Component 1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Principal Component 2&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🎯 Final distribution: [(&#39;cp&#39;, 143), (&#39;im&#39;, 77), (&#39;imL&#39;, 12), (&#39;imS&#39;, 12), (&#39;imU&#39;, 38), (&#39;om&#39;, 29), (&#39;omL&#39;, 15), (&#39;pp&#39;, 59)]
+</pre></div>
+</div>
+<img alt="_images/6bb3b758cd979ca96d3a1b9a18d18f8fcae5511b5cf195802d280d70c841d99e.png" src="_images/6bb3b758cd979ca96d3a1b9a18d18f8fcae5511b5cf195802d280d70c841d99e.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="ploting-data-dari-data-yang-diimbangkan-menggunakan-pca-tandai-data-data-hasil-generatenya">
+<h2>Ploting data dari data yang diimbangkan menggunakan PCA, tandai data data hasil generatenya<a class="headerlink" href="#ploting-data-dari-data-yang-diimbangkan-menggunakan-pca-tandai-data-data-hasil-generatenya" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
+
+<span class="c1"># Simpan jumlah data asli</span>
+<span class="n">n_original</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c1"># Setelah ADASYN (misalnya variabel hasilnya nt, ns)</span>
+<span class="n">X_resampled</span><span class="p">,</span> <span class="n">y_resampled</span> <span class="o">=</span> <span class="n">nt</span><span class="p">,</span> <span class="n">ns</span>
+
+<span class="c1"># PCA</span>
+<span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">X_pca</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_resampled</span><span class="p">)</span>
+
+<span class="c1"># Tandai asli vs sintetis</span>
+<span class="n">is_synthetic</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">n_original</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X_resampled</span><span class="p">))]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="k">for</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">y_resampled</span><span class="p">):</span>
+    <span class="n">mask_class</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_resampled</span> <span class="o">==</span> <span class="bp">cls</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+        <span class="n">X_pca</span><span class="p">[</span><span class="n">mask_class</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">is_synthetic</span><span class="p">),</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="n">X_pca</span><span class="p">[</span><span class="n">mask_class</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">is_synthetic</span><span class="p">),</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">cls</span><span class="si">}</span><span class="s2"> (original)&quot;</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span>
+    <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+        <span class="n">X_pca</span><span class="p">[</span><span class="n">mask_class</span> <span class="o">&amp;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">is_synthetic</span><span class="p">),</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="n">X_pca</span><span class="p">[</span><span class="n">mask_class</span> <span class="o">&amp;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">is_synthetic</span><span class="p">),</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">cls</span><span class="si">}</span><span class="s2"> (synthetic)&quot;</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;x&quot;</span>
+    <span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;PCA Scatter Plot setelah ADASYN</span><span class="se">\n</span><span class="s2">(original vs synthetic)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;PC1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;PC2&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7618c5355759d55d5b030084e9346f1000a690daa8996cdbc62139f04ef69c31.png" src="_images/7618c5355759d55d5b030084e9346f1000a690daa8996cdbc62139f04ef69c31.png" />
+</div>
+</div>
 </section>
 </section>
 
@@ -592,10 +917,20 @@ PCA mentransformasi data menjadi dimensi rendah (2)</p></li>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengambil-data-dari-mysql">Mengambil data dari MySql</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menampilkan-pca">Menampilkan PCA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kriteria-tugas">Kriteria Tugas :</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simpan-didatabase-mysql">Simpan didatabase MySQL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tampilkan-data-dalam-scatter-plot-menggunakan-pca-pca-mentransformasi-data-menjadi-dimensi-rendah-2">Tampilkan data dalam scatter plot  menggunakan PCA. PCA mentransformasi data menjadi dimensi rendah (2)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#smote">SMOTE</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#penyeimbangan-menggunakan-smote">Penyeimbangan menggunakan Smote</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-menggunakan-smote">Visualisasi Menggunakan Smote</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adasyn">ADASYN</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#penyeimbangan-data-menggunakan-adasyn">Penyeimbangan data menggunakan ADASYN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-adasyn-menggunakan-pca">Visualisasi ADASYN menggunakan PCA</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ploting-data-dari-data-yang-diimbangkan-menggunakan-pca-tandai-data-data-hasil-generatenya">Ploting data dari data yang diimbangkan menggunakan PCA, tandai data data hasil generatenya</a></li>
 </ul>
   </nav></div>
 
