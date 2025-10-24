@@ -31,8 +31,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['import openeo', 'import pandas as pd', 'import matplotlib.pyplot as plt', '', '# 1. Koneksi ke Copernicus Data Space']
+['# 1. Koneksi ke Copernicus Data Space', 'connection = openeo.connect("openeo.dataspace.copernicus.eu").authenticate_oidc()', '', '# 2. AOI: poligon kedua dari data kamu ', 'aoi = {']
 ...
-['plt.xticks(rotation=45)', 'plt.grid(True)', 'plt.legend()', 'plt.tight_layout()', 'plt.show()']
+['# 11. Buat kolom bulan (YYYY-MM)', 'df["month"] = df["date"].dt.to_period("M")', '', '# 12. Hitung rata-rata NO2 per bulan', 'df_monthly = df.groupby("month", as_index=False)["NO2"].mean()']
 -------------------
 

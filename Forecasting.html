@@ -388,14 +388,26 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baca-dataset">Baca Dataset</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deteksi-missing-value">Deteksi Missing Value</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-no2">Visualisasi NO2</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tangani-missing-value-dengan-interpolasi">Tangani Missing Value dengan Interpolasi</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cek-missing-value-lagi">Cek Missing Value Lagi</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#konversi-menjadi-data-supervised-learning">Konversi menjadi Data Supervised Learning</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data Preprocessing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tangani-missing-value-dengan-interpolasi">Tangani Missing Value dengan Interpolasi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cek-ulang-missing-value">Cek Ulang Missing Value</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-menjadi-supervised-learning">Convert Menjadi Supervised Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inisialisasi-hari-ke-2-5">Inisialisasi hari ke 2 - 5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-supervised-h1-h2">Data Supervised h1 &amp; h2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-supervised-h1-h2-dan-h3">Data Supervised h1, h2, dan h3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-supervised-h1-h2-h3-dan-h4">Data Supervised h1, h2, h3, dan h4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-supervised-h1-h2-h3-h4-dan-h5">Data Supervised h1, h2, h3, h4, dan h5</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-modelling">Data Modelling</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-menggunakan-k-nn-regression">Modelling menggunakan K-NN Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-data-h1-dan-h2-menggunakan-knn-regression">Modelling Data h1 dan h2 menggunakan KNN Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-data-h1-h2-dan-h3-menggunakan-k-nn-regression">Modelling Data h1, h2, dan h3 menggunakan K-NN Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-data-h1-h2-h3-dan-h4-menggunakan-k-nn-regression">Modelling Data h1, h2, h3, dan h4 menggunakan K-NN Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-data-h1-h2-h3-h4-dan-h5-menggunakan-k-nn-regression">Modelling Data h1 h2, h3,h4, dan h5 menggunakan K-NN Regression</a></li>
 </ul>
 </li>
 </ul>
@@ -424,129 +436,65 @@ document.write(`
 <p>Mengumpulkan data dan dijadikan format CSV.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>xarray<span class="w"> </span>pandas<span class="w"> </span>openeo
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">xarray</span> <span class="n">pandas</span> <span class="n">openeo</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting xarray
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading xarray-2025.10.1-py3-none-any.whl.metadata (12 kB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: xarray in /usr/local/python/3.12.1/lib/python3.12/site-packages (2025.1.1)
 Requirement already satisfied: pandas in /home/codespace/.local/lib/python3.12/site-packages (2.3.1)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting openeo
-  Downloading openeo-0.45.0-py3-none-any.whl.metadata (8.2 kB)
-Requirement already satisfied: numpy&gt;=1.26 in /home/codespace/.local/lib/python3.12/site-packages (from xarray) (2.3.1)
-Requirement already satisfied: packaging&gt;=24.1 in /home/codespace/.local/lib/python3.12/site-packages (from xarray) (25.0)
+Requirement already satisfied: openeo in /usr/local/python/3.12.1/lib/python3.12/site-packages (0.45.0)
+Requirement already satisfied: numpy&gt;=1.24 in /home/codespace/.local/lib/python3.12/site-packages (from xarray) (2.3.1)
+Requirement already satisfied: packaging&gt;=23.2 in /home/codespace/.local/lib/python3.12/site-packages (from xarray) (25.0)
 Requirement already satisfied: python-dateutil&gt;=2.8.2 in /home/codespace/.local/lib/python3.12/site-packages (from pandas) (2.9.0.post0)
 Requirement already satisfied: pytz&gt;=2020.1 in /home/codespace/.local/lib/python3.12/site-packages (from pandas) (2025.2)
 Requirement already satisfied: tzdata&gt;=2022.7 in /home/codespace/.local/lib/python3.12/site-packages (from pandas) (2025.2)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: requests&gt;=2.26.0 in /home/codespace/.local/lib/python3.12/site-packages (from openeo) (2.32.4)
+Requirement already satisfied: requests&gt;=2.26.0 in /home/codespace/.local/lib/python3.12/site-packages (from openeo) (2.32.4)
 Requirement already satisfied: urllib3&gt;=1.9.0 in /home/codespace/.local/lib/python3.12/site-packages (from openeo) (2.5.0)
+Requirement already satisfied: shapely&gt;=1.6.4 in /usr/local/python/3.12.1/lib/python3.12/site-packages (from openeo) (2.1.2)
+Requirement already satisfied: pystac&gt;=1.5.0 in /usr/local/python/3.12.1/lib/python3.12/site-packages (from openeo) (1.14.1)
+Requirement already satisfied: deprecated&gt;=1.2.12 in /usr/local/python/3.12.1/lib/python3.12/site-packages (from openeo) (1.2.18)
+Requirement already satisfied: wrapt&lt;2,&gt;=1.10 in /usr/local/python/3.12.1/lib/python3.12/site-packages (from deprecated&gt;=1.2.12-&gt;openeo) (1.17.3)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting shapely&gt;=1.6.4 (from openeo)
-  Downloading shapely-2.1.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (6.8 kB)
-Collecting xarray
-  Downloading xarray-2025.1.1-py3-none-any.whl.metadata (11 kB)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting pystac&gt;=1.5.0 (from openeo)
-  Downloading pystac-1.14.1-py3-none-any.whl.metadata (4.7 kB)
-Collecting deprecated&gt;=1.2.12 (from openeo)
-  Downloading Deprecated-1.2.18-py2.py3-none-any.whl.metadata (5.7 kB)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting wrapt&lt;2,&gt;=1.10 (from deprecated&gt;=1.2.12-&gt;openeo)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading wrapt-1.17.3-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (6.4 kB)
-Requirement already satisfied: six&gt;=1.5 in /home/codespace/.local/lib/python3.12/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas) (1.17.0)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: charset_normalizer&lt;4,&gt;=2 in /home/codespace/.local/lib/python3.12/site-packages (from requests&gt;=2.26.0-&gt;openeo) (3.4.2)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: six&gt;=1.5 in /home/codespace/.local/lib/python3.12/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas) (1.17.0)
+Requirement already satisfied: charset_normalizer&lt;4,&gt;=2 in /home/codespace/.local/lib/python3.12/site-packages (from requests&gt;=2.26.0-&gt;openeo) (3.4.2)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/codespace/.local/lib/python3.12/site-packages (from requests&gt;=2.26.0-&gt;openeo) (3.10)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /home/codespace/.local/lib/python3.12/site-packages (from requests&gt;=2.26.0-&gt;openeo) (2025.7.9)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading openeo-0.45.0-py3-none-any.whl (335 kB)
-Downloading xarray-2025.1.1-py3-none-any.whl (1.2 MB)
-?25l   <span class=" -Color -Color-C237">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Green">0.0/1.2 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   <span class=" -Color -Color-Red">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Green">1.2/1.2 MB</span> <span class=" -Color -Color-Red">25.8 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
-?25hDownloading Deprecated-1.2.18-py2.py3-none-any.whl (10.0 kB)
-Downloading wrapt-1.17.3-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (88 kB)
-Downloading pystac-1.14.1-py3-none-any.whl (207 kB)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading shapely-2.1.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (3.1 MB)
-?25l   <span class=" -Color -Color-C237">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Green">0.0/3.1 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   <span class=" -Color -Color-Red">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Green">3.1/3.1 MB</span> <span class=" -Color -Color-Red">47.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
-?25h
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: wrapt, shapely, pystac, deprecated, xarray, openeo
-?25l
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━╸<span class=" -Color -Color-C237">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Green">1/6</span> [shapely]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━╸<span class=" -Color -Color-C237">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Green">1/6</span> [shapely]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━<span class=" -Color -Color-C237">╺━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Green">2/6</span> [pystac]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━╸<span class=" -Color -Color-C237">━━━━━━━━━━━━━</span> <span class=" -Color -Color-Green">4/6</span> [xarray]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━╸<span class=" -Color -Color-C237">━━━━━━━━━━━━━</span> <span class=" -Color -Color-Green">4/6</span> [xarray]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━╸<span class=" -Color -Color-C237">━━━━━━━━━━━━━</span> <span class=" -Color -Color-Green">4/6</span> [xarray]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━╸<span class=" -Color -Color-C237">━━━━━━━━━━━━━</span> <span class=" -Color -Color-Green">4/6</span> [xarray]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━╸<span class=" -Color -Color-C237">━━━━━━━━━━━━━</span> <span class=" -Color -Color-Green">4/6</span> [xarray]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━╸<span class=" -Color -Color-C237">━━━━━━━━━━━━━</span> <span class=" -Color -Color-Green">4/6</span> [xarray]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<span class=" -Color -Color-C237">╺━━━━━━</span> <span class=" -Color -Color-Green">5/6</span> [openeo]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   <span class=" -Color -Color-Red">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Green">6/6</span> [openeo]
-?25h
-Successfully installed deprecated-1.2.18 openeo-0.45.0 pystac-1.14.1 shapely-2.1.2 wrapt-1.17.3 xarray-2025.1.1
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">25.1.1</span> -&gt; <span class=" -Color -Color-Green">25.2</span>
 <span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> To update, run: <span class=" -Color -Color-Green">python3 -m pip install --upgrade pip</span>
 </pre></div>
 </div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: you may need to restart the kernel to use updated packages.
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">openeo</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-
-<span class="c1"># 1. Koneksi ke Copernicus Data Space</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_regression</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNeighborsRegressor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">r2_score</span><span class="p">,</span> <span class="n">mean_squared_error</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">openeo</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Koneksi ke Copernicus Data Space</span>
 <span class="n">connection</span> <span class="o">=</span> <span class="n">openeo</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;openeo.dataspace.copernicus.eu&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">authenticate_oidc</span><span class="p">()</span>
 
-<span class="c1"># 2. AOI: poligon kedua dari data kamu (Bangkalan)</span>
+<span class="c1"># 2. AOI: poligon kedua dari data kamu </span>
 <span class="n">aoi</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Polygon&quot;</span><span class="p">,</span>
     <span class="s2">&quot;coordinates&quot;</span><span class="p">:</span> <span class="p">[</span>
@@ -623,69 +571,54 @@ Successfully installed deprecated-1.2.18 openeo-0.45.0 pystac-1.14.1 shapely-2.1
 
 <span class="c1"># 12. Hitung rata-rata NO2 per bulan</span>
 <span class="n">df_monthly</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;month&quot;</span><span class="p">,</span> <span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="s2">&quot;NO2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-
-<span class="c1"># 13. Visualisasi hasil</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df_monthly</span><span class="p">[</span><span class="s2">&quot;month&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span> <span class="n">df_monthly</span><span class="p">[</span><span class="s2">&quot;NO2&quot;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;NO₂ Rata-rata per Bulan&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Rata-rata Bulanan NO₂ (Sentinel-5P) di Kabupaten Gresik&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Bulan&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Konsentrasi NO₂&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">Visit <a href="https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=ZRMM-DOQN" title="Authenticate at https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=ZRMM-DOQN" target="_blank" rel="noopener noreferrer">https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=ZRMM-DOQN</a> <a href="#" onclick="navigator.clipboard.writeText('https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=ZRMM-DOQN');return false;" title="Copy authentication URL to clipboard">&#128203;</a> to authenticate.</div><div class="output text_html"><code>[##################################---]</code> ⌛ Authorization pending</div><div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Authenticated using refresh token.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0:00:00 Job &#39;j-2510241659534b37bf027879adf8d4a0&#39;: send &#39;start&#39;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0:00:13 Job &#39;j-2510241659534b37bf027879adf8d4a0&#39;: created (progress 0%)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0:00:19 Job &#39;j-2510241659534b37bf027879adf8d4a0&#39;: queued (progress 0%)
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># 1. Koneksi ke Copernicus Data Space</span>
-<span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">connection</span> <span class="o">=</span> <span class="n">openeo</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;openeo.dataspace.copernicus.eu&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">authenticate_oidc</span><span class="p">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="c1"># 2. AOI: poligon kedua dari data kamu (Bangkalan)</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">aoi</span> <span class="o">=</span> <span class="p">{</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Polygon&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="s2">&quot;coordinates&quot;</span><span class="p">:</span> <span class="p">[</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>     <span class="mi">34</span>     <span class="p">],</span>
-<span class="g g-Whitespace">     </span><span class="mi">35</span> <span class="p">}</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">59</span>
+<span class="g g-Whitespace">     </span><span class="mi">56</span> <span class="n">daily_mean_aoi</span> <span class="o">=</span> <span class="n">daily_mean</span><span class="o">.</span><span class="n">aggregate_spatial</span><span class="p">(</span><span class="n">geometries</span><span class="o">=</span><span class="n">aoi</span><span class="p">,</span> <span class="n">reducer</span><span class="o">=</span><span class="s2">&quot;mean&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">58</span> <span class="c1"># 7. Jalankan batch job dan hasilkan file CSV</span>
+<span class="ne">---&gt; </span><span class="mi">59</span> <span class="n">job</span> <span class="o">=</span> <span class="n">daily_mean_aoi</span><span class="o">.</span><span class="n">execute_batch</span><span class="p">(</span><span class="n">out_format</span><span class="o">=</span><span class="s2">&quot;CSV&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">61</span> <span class="c1"># 8. Unduh hasil job</span>
+<span class="g g-Whitespace">     </span><span class="mi">62</span> <span class="n">results</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">get_results</span><span class="p">()</span>
 
-<span class="nn">File /usr/local/python/3.12.1/lib/python3.12/site-packages/openeo/rest/connection.py:621,</span> in <span class="ni">Connection.authenticate_oidc</span><span class="nt">(self, provider_id, client_id, client_secret, store_refresh_token, use_pkce, display, max_poll_time)</span>
-<span class="g g-Whitespace">    </span><span class="mi">617</span> <span class="n">_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Trying device code flow.&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">618</span> <span class="n">authenticator</span> <span class="o">=</span> <span class="n">OidcDeviceAuthenticator</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">619</span>     <span class="n">client_info</span><span class="o">=</span><span class="n">client_info</span><span class="p">,</span> <span class="n">use_pkce</span><span class="o">=</span><span class="n">use_pkce</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="n">display</span><span class="p">,</span> <span class="n">max_poll_time</span><span class="o">=</span><span class="n">max_poll_time</span>
-<span class="g g-Whitespace">    </span><span class="mi">620</span> <span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">621</span> <span class="n">con</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_authenticate_oidc</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">622</span>     <span class="n">authenticator</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">623</span>     <span class="n">provider_id</span><span class="o">=</span><span class="n">provider_id</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">624</span>     <span class="n">store_refresh_token</span><span class="o">=</span><span class="n">store_refresh_token</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">625</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">626</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Authenticated using device code flow.&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">627</span> <span class="k">return</span> <span class="n">con</span>
+<span class="nn">File /usr/local/python/3.12.1/lib/python3.12/site-packages/openeo/rest/vectorcube.py:391,</span> in <span class="ni">VectorCube.execute_batch</span><span class="nt">(self, outputfile, out_format, title, description, plan, budget, print, max_poll_interval, connection_retry_interval, additional, job_options, validate, auto_add_save_result, show_error_logs, log_level, **format_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">378</span>     <span class="n">create_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;auto_add_save_result&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
+<span class="g g-Whitespace">    </span><span class="mi">380</span> <span class="n">job</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">create_job</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">381</span>     <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">382</span>     <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>    <span class="mi">389</span>     <span class="o">**</span><span class="n">create_kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">390</span> <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">391</span> <span class="n">job</span><span class="o">.</span><span class="n">start_and_wait</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">392</span>     <span class="nb">print</span><span class="o">=</span><span class="nb">print</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">393</span>     <span class="n">max_poll_interval</span><span class="o">=</span><span class="n">max_poll_interval</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">394</span>     <span class="n">connection_retry_interval</span><span class="o">=</span><span class="n">connection_retry_interval</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">395</span>     <span class="n">show_error_logs</span><span class="o">=</span><span class="n">show_error_logs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">396</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">397</span> <span class="k">if</span> <span class="n">outputfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">398</span>     <span class="n">job</span><span class="o">.</span><span class="n">download_result</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">outputfile</span><span class="p">)</span>
 
-<span class="nn">File /usr/local/python/3.12.1/lib/python3.12/site-packages/openeo/rest/connection.py:351,</span> in <span class="ni">Connection._authenticate_oidc</span><span class="nt">(self, authenticator, provider_id, store_refresh_token, fallback_refresh_token_to_store, oidc_auth_renewer)</span>
-<span class="g g-Whitespace">    </span><span class="mi">339</span> <span class="k">def</span><span class="w"> </span><span class="nf">_authenticate_oidc</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">340</span>     <span class="bp">self</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">341</span>     <span class="n">authenticator</span><span class="p">:</span> <span class="n">OidcAuthenticator</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>    <span class="mi">346</span>     <span class="n">oidc_auth_renewer</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">OidcAuthenticator</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">347</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Connection</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">348</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">349</span><span class="sd">     Authenticate through OIDC and set up bearer token (based on OIDC access_token) for further requests.</span>
-<span class="g g-Whitespace">    </span><span class="mi">350</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">351</span>     <span class="n">tokens</span> <span class="o">=</span> <span class="n">authenticator</span><span class="o">.</span><span class="n">get_tokens</span><span class="p">(</span><span class="n">request_refresh_token</span><span class="o">=</span><span class="n">store_refresh_token</span><span class="p">)</span>
-<span class="nn">    352     _log.info(&quot;Obtained tokens: {t}&quot;.format(t=[k for k, v</span> in <span class="ni">tokens._asdict().items</span><span class="nt">() if v]))</span>
-<span class="g g-Whitespace">    </span><span class="mi">353</span>     <span class="k">if</span> <span class="n">store_refresh_token</span><span class="p">:</span>
-
-<span class="nn">File /usr/local/python/3.12.1/lib/python3.12/site-packages/openeo/rest/auth/oidc.py:914,</span> in <span class="ni">OidcDeviceAuthenticator.get_tokens</span><span class="nt">(self, request_refresh_token)</span>
-<span class="g g-Whitespace">    </span><span class="mi">912</span> <span class="k">while</span> <span class="n">elapsed</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_poll_time</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">913</span>     <span class="n">poll_ui</span><span class="o">.</span><span class="n">show_progress</span><span class="p">()</span>
-<span class="ne">--&gt; </span><span class="mi">914</span>     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">sleep</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">916</span>     <span class="k">if</span> <span class="n">elapsed</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="n">next_poll</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">917</span>         <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">918</span>             <span class="sa">f</span><span class="s2">&quot;Doing </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">grant_type</span><span class="si">!r}</span><span class="s2"> token request </span><span class="si">{</span><span class="n">token_endpoint</span><span class="si">!r}</span><span class="s2"> with post data fields </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">post_data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">!r}</span><span class="s2"> (client_id </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">client_id</span><span class="si">!r}</span><span class="s2">)&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">919</span>         <span class="p">)</span>
+<span class="nn">File /usr/local/python/3.12.1/lib/python3.12/site-packages/openeo/rest/job.py:371,</span> in <span class="ni">BatchJob.start_and_wait</span><span class="nt">(self, print, max_poll_interval, connection_retry_interval, soft_error_max, show_error_logs, require_success)</span>
+<span class="g g-Whitespace">    </span><span class="mi">368</span>         <span class="k">break</span>
+<span class="g g-Whitespace">    </span><span class="mi">370</span>     <span class="c1"># Sleep for next poll (and adaptively make polling less frequent)</span>
+<span class="ne">--&gt; </span><span class="mi">371</span>     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">poll_interval</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">372</span>     <span class="n">poll_interval</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mf">1.25</span> <span class="o">*</span> <span class="n">poll_interval</span><span class="p">,</span> <span class="n">max_poll_interval</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">374</span> <span class="k">if</span> <span class="n">require_success</span> <span class="ow">and</span> <span class="n">status</span> <span class="o">!=</span> <span class="s2">&quot;finished&quot;</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">375</span>     <span class="c1"># TODO: render logs jupyter-aware in a notebook context?</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -705,9 +638,7 @@ Successfully installed deprecated-1.2.18 openeo-0.45.0 pystac-1.14.1 shapely-2.1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">
-  <div id="df-9d7e6039-2ca5-4e9c-9cd7-72f2a7176851" class="colab-df-container">
-    <div>
+<div class="output text_html"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -725,460 +656,195 @@ Successfully installed deprecated-1.2.18 openeo-0.45.0 pystac-1.14.1 shapely-2.1
   <thead>
     <tr style="text-align: right;">
       <th></th>
+      <th>Unnamed: 0</th>
       <th>date</th>
-      <th>feature_index</th>
       <th>NO2</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>2025-09-22</td>
       <td>0</td>
-      <td>NaN</td>
+      <td>2025-09-22</td>
+      <td>0.000112</td>
     </tr>
     <tr>
       <th>1</th>
+      <td>1</td>
       <td>2025-09-23</td>
-      <td>0</td>
       <td>0.000112</td>
     </tr>
     <tr>
       <th>2</th>
+      <td>2</td>
       <td>2025-09-24</td>
-      <td>0</td>
       <td>0.000202</td>
     </tr>
     <tr>
       <th>3</th>
+      <td>3</td>
       <td>2025-09-25</td>
-      <td>0</td>
       <td>0.000073</td>
     </tr>
     <tr>
       <th>4</th>
+      <td>4</td>
       <td>2025-09-26</td>
-      <td>0</td>
       <td>0.000043</td>
     </tr>
     <tr>
       <th>5</th>
+      <td>5</td>
       <td>2025-09-27</td>
-      <td>0</td>
       <td>0.000034</td>
     </tr>
     <tr>
       <th>6</th>
+      <td>6</td>
       <td>2025-09-28</td>
-      <td>0</td>
       <td>0.000026</td>
     </tr>
     <tr>
       <th>7</th>
+      <td>7</td>
       <td>2025-09-29</td>
-      <td>0</td>
       <td>0.000038</td>
     </tr>
     <tr>
       <th>8</th>
+      <td>8</td>
       <td>2025-09-30</td>
-      <td>0</td>
-      <td>NaN</td>
+      <td>0.000047</td>
     </tr>
     <tr>
       <th>9</th>
+      <td>9</td>
       <td>2025-10-01</td>
-      <td>0</td>
-      <td>NaN</td>
+      <td>0.000056</td>
     </tr>
     <tr>
       <th>10</th>
+      <td>10</td>
       <td>2025-10-02</td>
-      <td>0</td>
       <td>0.000066</td>
     </tr>
     <tr>
       <th>11</th>
+      <td>11</td>
       <td>2025-10-03</td>
-      <td>0</td>
       <td>0.000040</td>
     </tr>
     <tr>
       <th>12</th>
+      <td>12</td>
       <td>2025-10-04</td>
-      <td>0</td>
       <td>0.000070</td>
     </tr>
     <tr>
       <th>13</th>
+      <td>13</td>
       <td>2025-10-05</td>
-      <td>0</td>
       <td>0.000039</td>
     </tr>
     <tr>
       <th>14</th>
+      <td>14</td>
       <td>2025-10-06</td>
-      <td>0</td>
       <td>0.000051</td>
     </tr>
     <tr>
       <th>15</th>
+      <td>15</td>
       <td>2025-10-07</td>
-      <td>0</td>
       <td>0.000081</td>
     </tr>
     <tr>
       <th>16</th>
+      <td>16</td>
       <td>2025-10-08</td>
-      <td>0</td>
       <td>0.000063</td>
     </tr>
     <tr>
       <th>17</th>
+      <td>17</td>
       <td>2025-10-09</td>
-      <td>0</td>
       <td>0.000119</td>
     </tr>
     <tr>
       <th>18</th>
+      <td>18</td>
       <td>2025-10-10</td>
-      <td>0</td>
       <td>0.000096</td>
     </tr>
     <tr>
       <th>19</th>
+      <td>19</td>
       <td>2025-10-11</td>
-      <td>0</td>
       <td>0.000053</td>
     </tr>
     <tr>
       <th>20</th>
+      <td>20</td>
       <td>2025-10-12</td>
-      <td>0</td>
       <td>0.000022</td>
     </tr>
     <tr>
       <th>21</th>
+      <td>21</td>
       <td>2025-10-13</td>
-      <td>0</td>
       <td>0.000011</td>
     </tr>
     <tr>
       <th>22</th>
+      <td>22</td>
       <td>2025-10-14</td>
-      <td>0</td>
       <td>0.000041</td>
     </tr>
     <tr>
       <th>23</th>
+      <td>23</td>
       <td>2025-10-15</td>
-      <td>0</td>
       <td>0.000033</td>
     </tr>
     <tr>
       <th>24</th>
+      <td>24</td>
       <td>2025-10-16</td>
-      <td>0</td>
       <td>0.000051</td>
     </tr>
     <tr>
       <th>25</th>
+      <td>25</td>
       <td>2025-10-17</td>
-      <td>0</td>
       <td>0.000050</td>
     </tr>
     <tr>
       <th>26</th>
+      <td>26</td>
       <td>2025-10-18</td>
-      <td>0</td>
       <td>0.000040</td>
     </tr>
     <tr>
       <th>27</th>
+      <td>27</td>
       <td>2025-10-19</td>
-      <td>0</td>
       <td>0.000034</td>
     </tr>
     <tr>
       <th>28</th>
+      <td>28</td>
       <td>2025-10-20</td>
-      <td>0</td>
-      <td>NaN</td>
+      <td>0.000045</td>
     </tr>
     <tr>
       <th>29</th>
+      <td>29</td>
       <td>2025-10-21</td>
-      <td>0</td>
       <td>0.000056</td>
     </tr>
   </tbody>
 </table>
-</div>
-    <div class="colab-df-buttons">
-
-  <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-9d7e6039-2ca5-4e9c-9cd7-72f2a7176851')"
-            title="Convert this dataframe to an interactive table."
-            style="display:none;">
-
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
-    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
-  </svg>
-    </button>
-
-  <style>
-    .colab-df-container {
-      display:flex;
-      gap: 12px;
-    }
-
-    .colab-df-convert {
-      background-color: #E8F0FE;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      display: none;
-      fill: #1967D2;
-      height: 32px;
-      padding: 0 0 0 0;
-      width: 32px;
-    }
-
-    .colab-df-convert:hover {
-      background-color: #E2EBFA;
-      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-      fill: #174EA6;
-    }
-
-    .colab-df-buttons div {
-      margin-bottom: 4px;
-    }
-
-    [theme=dark] .colab-df-convert {
-      background-color: #3B4455;
-      fill: #D2E3FC;
-    }
-
-    [theme=dark] .colab-df-convert:hover {
-      background-color: #434B5C;
-      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-      fill: #FFFFFF;
-    }
-  </style>
-
-    <script>
-      const buttonEl =
-        document.querySelector('#df-9d7e6039-2ca5-4e9c-9cd7-72f2a7176851 button.colab-df-convert');
-      buttonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-      async function convertToInteractive(key) {
-        const element = document.querySelector('#df-9d7e6039-2ca5-4e9c-9cd7-72f2a7176851');
-        const dataTable =
-          await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                    [key], {});
-        if (!dataTable) return;
-
-        const docLinkHtml = 'Like what you see? Visit the ' +
-          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
-          + ' to learn more about interactive tables.';
-        element.innerHTML = '';
-        dataTable['output_type'] = 'display_data';
-        await google.colab.output.renderOutput(dataTable, element);
-        const docLink = document.createElement('div');
-        docLink.innerHTML = docLinkHtml;
-        element.appendChild(docLink);
-      }
-    </script>
-  </div>
-
-
-    <div id="df-21e81e4d-4d69-478c-b050-cc738372cdd3">
-      <button class="colab-df-quickchart" onclick="quickchart('df-21e81e4d-4d69-478c-b050-cc738372cdd3')"
-                title="Suggest charts"
-                style="display:none;">
-
-<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-     width="24px">
-    <g>
-        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
-    </g>
-</svg>
-      </button>
-
-<style>
-  .colab-df-quickchart {
-      --bg-color: #E8F0FE;
-      --fill-color: #1967D2;
-      --hover-bg-color: #E2EBFA;
-      --hover-fill-color: #174EA6;
-      --disabled-fill-color: #AAA;
-      --disabled-bg-color: #DDD;
-  }
-
-  [theme=dark] .colab-df-quickchart {
-      --bg-color: #3B4455;
-      --fill-color: #D2E3FC;
-      --hover-bg-color: #434B5C;
-      --hover-fill-color: #FFFFFF;
-      --disabled-bg-color: #3B4455;
-      --disabled-fill-color: #666;
-  }
-
-  .colab-df-quickchart {
-    background-color: var(--bg-color);
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    display: none;
-    fill: var(--fill-color);
-    height: 32px;
-    padding: 0;
-    width: 32px;
-  }
-
-  .colab-df-quickchart:hover {
-    background-color: var(--hover-bg-color);
-    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
-    fill: var(--button-hover-fill-color);
-  }
-
-  .colab-df-quickchart-complete:disabled,
-  .colab-df-quickchart-complete:disabled:hover {
-    background-color: var(--disabled-bg-color);
-    fill: var(--disabled-fill-color);
-    box-shadow: none;
-  }
-
-  .colab-df-spinner {
-    border: 2px solid var(--fill-color);
-    border-color: transparent;
-    border-bottom-color: var(--fill-color);
-    animation:
-      spin 1s steps(1) infinite;
-  }
-
-  @keyframes spin {
-    0% {
-      border-color: transparent;
-      border-bottom-color: var(--fill-color);
-      border-left-color: var(--fill-color);
-    }
-    20% {
-      border-color: transparent;
-      border-left-color: var(--fill-color);
-      border-top-color: var(--fill-color);
-    }
-    30% {
-      border-color: transparent;
-      border-left-color: var(--fill-color);
-      border-top-color: var(--fill-color);
-      border-right-color: var(--fill-color);
-    }
-    40% {
-      border-color: transparent;
-      border-right-color: var(--fill-color);
-      border-top-color: var(--fill-color);
-    }
-    60% {
-      border-color: transparent;
-      border-right-color: var(--fill-color);
-    }
-    80% {
-      border-color: transparent;
-      border-right-color: var(--fill-color);
-      border-bottom-color: var(--fill-color);
-    }
-    90% {
-      border-color: transparent;
-      border-bottom-color: var(--fill-color);
-    }
-  }
-</style>
-
-      <script>
-        async function quickchart(key) {
-          const quickchartButtonEl =
-            document.querySelector('#' + key + ' button');
-          quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
-          quickchartButtonEl.classList.add('colab-df-spinner');
-          try {
-            const charts = await google.colab.kernel.invokeFunction(
-                'suggestCharts', [key], {});
-          } catch (error) {
-            console.error('Error during call to suggestCharts:', error);
-          }
-          quickchartButtonEl.classList.remove('colab-df-spinner');
-          quickchartButtonEl.classList.add('colab-df-quickchart-complete');
-        }
-        (() => {
-          let quickchartButtonEl =
-            document.querySelector('#df-21e81e4d-4d69-478c-b050-cc738372cdd3 button');
-          quickchartButtonEl.style.display =
-            google.colab.kernel.accessAllowed ? 'block' : 'none';
-        })();
-      </script>
-    </div>
-
-  <div id="id_922535f9-0a00-46c6-82a3-8503fe3db27f">
-    <style>
-      .colab-df-generate {
-        background-color: #E8F0FE;
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        display: none;
-        fill: #1967D2;
-        height: 32px;
-        padding: 0 0 0 0;
-        width: 32px;
-      }
-
-      .colab-df-generate:hover {
-        background-color: #E2EBFA;
-        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-        fill: #174EA6;
-      }
-
-      [theme=dark] .colab-df-generate {
-        background-color: #3B4455;
-        fill: #D2E3FC;
-      }
-
-      [theme=dark] .colab-df-generate:hover {
-        background-color: #434B5C;
-        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-        fill: #FFFFFF;
-      }
-    </style>
-    <button class="colab-df-generate" onclick="generateWithVariable('new_df')"
-            title="Generate code using this dataframe."
-            style="display:none;">
-
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-       width="24px">
-    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
-  </svg>
-    </button>
-    <script>
-      (() => {
-      const buttonEl =
-        document.querySelector('#id_922535f9-0a00-46c6-82a3-8503fe3db27f button.colab-df-generate');
-      buttonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-      buttonEl.onclick = () => {
-        google.colab.notebook.generateWithVariable('new_df');
-      }
-      })();
-    </script>
-  </div>
-
-    </div>
-  </div>
-</div></div>
+</div></div></div>
 </div>
 </section>
 <section id="deteksi-missing-value">
@@ -1198,9 +864,7 @@ Successfully installed deprecated-1.2.18 openeo-0.45.0 pystac-1.14.1 shapely-2.1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">
-  <div id="df-679c9b23-3394-43f9-b8b8-9f300e794149" class="colab-df-container">
-    <div>
+<div class="output text_html"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -1224,288 +888,23 @@ Successfully installed deprecated-1.2.18 openeo-0.45.0 pystac-1.14.1 shapely-2.1
   </thead>
   <tbody>
     <tr>
-      <th>date</th>
+      <th>Unnamed: 0</th>
       <td>0</td>
-      <td>0.00</td>
+      <td>0.0</td>
     </tr>
     <tr>
-      <th>feature_index</th>
+      <th>date</th>
       <td>0</td>
-      <td>0.00</td>
+      <td>0.0</td>
     </tr>
     <tr>
       <th>NO2</th>
-      <td>4</td>
-      <td>13.33</td>
+      <td>0</td>
+      <td>0.0</td>
     </tr>
   </tbody>
 </table>
-</div>
-    <div class="colab-df-buttons">
-
-  <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-679c9b23-3394-43f9-b8b8-9f300e794149')"
-            title="Convert this dataframe to an interactive table."
-            style="display:none;">
-
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
-    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
-  </svg>
-    </button>
-
-  <style>
-    .colab-df-container {
-      display:flex;
-      gap: 12px;
-    }
-
-    .colab-df-convert {
-      background-color: #E8F0FE;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      display: none;
-      fill: #1967D2;
-      height: 32px;
-      padding: 0 0 0 0;
-      width: 32px;
-    }
-
-    .colab-df-convert:hover {
-      background-color: #E2EBFA;
-      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-      fill: #174EA6;
-    }
-
-    .colab-df-buttons div {
-      margin-bottom: 4px;
-    }
-
-    [theme=dark] .colab-df-convert {
-      background-color: #3B4455;
-      fill: #D2E3FC;
-    }
-
-    [theme=dark] .colab-df-convert:hover {
-      background-color: #434B5C;
-      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-      fill: #FFFFFF;
-    }
-  </style>
-
-    <script>
-      const buttonEl =
-        document.querySelector('#df-679c9b23-3394-43f9-b8b8-9f300e794149 button.colab-df-convert');
-      buttonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-      async function convertToInteractive(key) {
-        const element = document.querySelector('#df-679c9b23-3394-43f9-b8b8-9f300e794149');
-        const dataTable =
-          await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                    [key], {});
-        if (!dataTable) return;
-
-        const docLinkHtml = 'Like what you see? Visit the ' +
-          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
-          + ' to learn more about interactive tables.';
-        element.innerHTML = '';
-        dataTable['output_type'] = 'display_data';
-        await google.colab.output.renderOutput(dataTable, element);
-        const docLink = document.createElement('div');
-        docLink.innerHTML = docLinkHtml;
-        element.appendChild(docLink);
-      }
-    </script>
-  </div>
-
-
-    <div id="df-b5d88ce4-8b0f-457f-8f9c-d9f294075f08">
-      <button class="colab-df-quickchart" onclick="quickchart('df-b5d88ce4-8b0f-457f-8f9c-d9f294075f08')"
-                title="Suggest charts"
-                style="display:none;">
-
-<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-     width="24px">
-    <g>
-        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
-    </g>
-</svg>
-      </button>
-
-<style>
-  .colab-df-quickchart {
-      --bg-color: #E8F0FE;
-      --fill-color: #1967D2;
-      --hover-bg-color: #E2EBFA;
-      --hover-fill-color: #174EA6;
-      --disabled-fill-color: #AAA;
-      --disabled-bg-color: #DDD;
-  }
-
-  [theme=dark] .colab-df-quickchart {
-      --bg-color: #3B4455;
-      --fill-color: #D2E3FC;
-      --hover-bg-color: #434B5C;
-      --hover-fill-color: #FFFFFF;
-      --disabled-bg-color: #3B4455;
-      --disabled-fill-color: #666;
-  }
-
-  .colab-df-quickchart {
-    background-color: var(--bg-color);
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    display: none;
-    fill: var(--fill-color);
-    height: 32px;
-    padding: 0;
-    width: 32px;
-  }
-
-  .colab-df-quickchart:hover {
-    background-color: var(--hover-bg-color);
-    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
-    fill: var(--button-hover-fill-color);
-  }
-
-  .colab-df-quickchart-complete:disabled,
-  .colab-df-quickchart-complete:disabled:hover {
-    background-color: var(--disabled-bg-color);
-    fill: var(--disabled-fill-color);
-    box-shadow: none;
-  }
-
-  .colab-df-spinner {
-    border: 2px solid var(--fill-color);
-    border-color: transparent;
-    border-bottom-color: var(--fill-color);
-    animation:
-      spin 1s steps(1) infinite;
-  }
-
-  @keyframes spin {
-    0% {
-      border-color: transparent;
-      border-bottom-color: var(--fill-color);
-      border-left-color: var(--fill-color);
-    }
-    20% {
-      border-color: transparent;
-      border-left-color: var(--fill-color);
-      border-top-color: var(--fill-color);
-    }
-    30% {
-      border-color: transparent;
-      border-left-color: var(--fill-color);
-      border-top-color: var(--fill-color);
-      border-right-color: var(--fill-color);
-    }
-    40% {
-      border-color: transparent;
-      border-right-color: var(--fill-color);
-      border-top-color: var(--fill-color);
-    }
-    60% {
-      border-color: transparent;
-      border-right-color: var(--fill-color);
-    }
-    80% {
-      border-color: transparent;
-      border-right-color: var(--fill-color);
-      border-bottom-color: var(--fill-color);
-    }
-    90% {
-      border-color: transparent;
-      border-bottom-color: var(--fill-color);
-    }
-  }
-</style>
-
-      <script>
-        async function quickchart(key) {
-          const quickchartButtonEl =
-            document.querySelector('#' + key + ' button');
-          quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
-          quickchartButtonEl.classList.add('colab-df-spinner');
-          try {
-            const charts = await google.colab.kernel.invokeFunction(
-                'suggestCharts', [key], {});
-          } catch (error) {
-            console.error('Error during call to suggestCharts:', error);
-          }
-          quickchartButtonEl.classList.remove('colab-df-spinner');
-          quickchartButtonEl.classList.add('colab-df-quickchart-complete');
-        }
-        (() => {
-          let quickchartButtonEl =
-            document.querySelector('#df-b5d88ce4-8b0f-457f-8f9c-d9f294075f08 button');
-          quickchartButtonEl.style.display =
-            google.colab.kernel.accessAllowed ? 'block' : 'none';
-        })();
-      </script>
-    </div>
-
-  <div id="id_da0764ed-c26d-4b0a-ae5f-6c7d629b98ff">
-    <style>
-      .colab-df-generate {
-        background-color: #E8F0FE;
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        display: none;
-        fill: #1967D2;
-        height: 32px;
-        padding: 0 0 0 0;
-        width: 32px;
-      }
-
-      .colab-df-generate:hover {
-        background-color: #E2EBFA;
-        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-        fill: #174EA6;
-      }
-
-      [theme=dark] .colab-df-generate {
-        background-color: #3B4455;
-        fill: #D2E3FC;
-      }
-
-      [theme=dark] .colab-df-generate:hover {
-        background-color: #434B5C;
-        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-        fill: #FFFFFF;
-      }
-    </style>
-    <button class="colab-df-generate" onclick="generateWithVariable('missing_table')"
-            title="Generate code using this dataframe."
-            style="display:none;">
-
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-       width="24px">
-    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
-  </svg>
-    </button>
-    <script>
-      (() => {
-      const buttonEl =
-        document.querySelector('#id_da0764ed-c26d-4b0a-ae5f-6c7d629b98ff button.colab-df-generate');
-      buttonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-      buttonEl.onclick = () => {
-        google.colab.notebook.generateWithVariable('missing_table');
-      }
-      })();
-    </script>
-  </div>
-
-    </div>
-  </div>
-</div></div>
+</div></div></div>
 </div>
 </section>
 <section id="visualisasi-no2">
@@ -1524,10 +923,13 @@ Successfully installed deprecated-1.2.18 openeo-0.45.0 pystac-1.14.1 shapely-2.1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c77fa13d7622ffc78adf771968a527e7d5bfbd9be12c9b96a93d6f84cb6354f3.png" src="_images/c77fa13d7622ffc78adf771968a527e7d5bfbd9be12c9b96a93d6f84cb6354f3.png" />
+<img alt="_images/cb53f3373d15d3cce092e36175420ba54a62f21a3e2ec6f56404acbd4028fa9a.png" src="_images/cb53f3373d15d3cce092e36175420ba54a62f21a3e2ec6f56404acbd4028fa9a.png" />
 </div>
 </div>
 </section>
+</section>
+<section id="data-preprocessing">
+<h2>Data Preprocessing<a class="headerlink" href="#data-preprocessing" title="Link to this heading">#</a></h2>
 <section id="tangani-missing-value-dengan-interpolasi">
 <h3>Tangani Missing Value dengan Interpolasi<a class="headerlink" href="#tangani-missing-value-dengan-interpolasi" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
@@ -1535,15 +937,13 @@ Successfully installed deprecated-1.2.18 openeo-0.45.0 pystac-1.14.1 shapely-2.1
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;NO2&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;NO2&#39;</span><span class="p">)</span>
 <span class="n">new_df</span> <span class="o">=</span> <span class="n">new_df</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">bfill</span><span class="p">()</span>
 <span class="n">new_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">new_df</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-<span class="n">new_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;/content/no2_results/timeseries.csv&quot;</span><span class="p">)</span>
+<span class="n">new_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;no2_results/timeseries.csv&quot;</span><span class="p">)</span>
 <span class="n">new_df</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">
-  <div id="df-aaad4630-b6f8-4851-9653-7144ce2db3da" class="colab-df-container">
-    <div>
+<div class="output text_html"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -1718,276 +1118,11 @@ Successfully installed deprecated-1.2.18 openeo-0.45.0 pystac-1.14.1 shapely-2.1
     </tr>
   </tbody>
 </table>
-</div>
-    <div class="colab-df-buttons">
-
-  <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-aaad4630-b6f8-4851-9653-7144ce2db3da')"
-            title="Convert this dataframe to an interactive table."
-            style="display:none;">
-
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
-    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
-  </svg>
-    </button>
-
-  <style>
-    .colab-df-container {
-      display:flex;
-      gap: 12px;
-    }
-
-    .colab-df-convert {
-      background-color: #E8F0FE;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      display: none;
-      fill: #1967D2;
-      height: 32px;
-      padding: 0 0 0 0;
-      width: 32px;
-    }
-
-    .colab-df-convert:hover {
-      background-color: #E2EBFA;
-      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-      fill: #174EA6;
-    }
-
-    .colab-df-buttons div {
-      margin-bottom: 4px;
-    }
-
-    [theme=dark] .colab-df-convert {
-      background-color: #3B4455;
-      fill: #D2E3FC;
-    }
-
-    [theme=dark] .colab-df-convert:hover {
-      background-color: #434B5C;
-      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-      fill: #FFFFFF;
-    }
-  </style>
-
-    <script>
-      const buttonEl =
-        document.querySelector('#df-aaad4630-b6f8-4851-9653-7144ce2db3da button.colab-df-convert');
-      buttonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-      async function convertToInteractive(key) {
-        const element = document.querySelector('#df-aaad4630-b6f8-4851-9653-7144ce2db3da');
-        const dataTable =
-          await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                    [key], {});
-        if (!dataTable) return;
-
-        const docLinkHtml = 'Like what you see? Visit the ' +
-          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
-          + ' to learn more about interactive tables.';
-        element.innerHTML = '';
-        dataTable['output_type'] = 'display_data';
-        await google.colab.output.renderOutput(dataTable, element);
-        const docLink = document.createElement('div');
-        docLink.innerHTML = docLinkHtml;
-        element.appendChild(docLink);
-      }
-    </script>
-  </div>
-
-
-    <div id="df-fbaa072e-df5a-4f74-91c9-b7b3e57d23f5">
-      <button class="colab-df-quickchart" onclick="quickchart('df-fbaa072e-df5a-4f74-91c9-b7b3e57d23f5')"
-                title="Suggest charts"
-                style="display:none;">
-
-<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-     width="24px">
-    <g>
-        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
-    </g>
-</svg>
-      </button>
-
-<style>
-  .colab-df-quickchart {
-      --bg-color: #E8F0FE;
-      --fill-color: #1967D2;
-      --hover-bg-color: #E2EBFA;
-      --hover-fill-color: #174EA6;
-      --disabled-fill-color: #AAA;
-      --disabled-bg-color: #DDD;
-  }
-
-  [theme=dark] .colab-df-quickchart {
-      --bg-color: #3B4455;
-      --fill-color: #D2E3FC;
-      --hover-bg-color: #434B5C;
-      --hover-fill-color: #FFFFFF;
-      --disabled-bg-color: #3B4455;
-      --disabled-fill-color: #666;
-  }
-
-  .colab-df-quickchart {
-    background-color: var(--bg-color);
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    display: none;
-    fill: var(--fill-color);
-    height: 32px;
-    padding: 0;
-    width: 32px;
-  }
-
-  .colab-df-quickchart:hover {
-    background-color: var(--hover-bg-color);
-    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
-    fill: var(--button-hover-fill-color);
-  }
-
-  .colab-df-quickchart-complete:disabled,
-  .colab-df-quickchart-complete:disabled:hover {
-    background-color: var(--disabled-bg-color);
-    fill: var(--disabled-fill-color);
-    box-shadow: none;
-  }
-
-  .colab-df-spinner {
-    border: 2px solid var(--fill-color);
-    border-color: transparent;
-    border-bottom-color: var(--fill-color);
-    animation:
-      spin 1s steps(1) infinite;
-  }
-
-  @keyframes spin {
-    0% {
-      border-color: transparent;
-      border-bottom-color: var(--fill-color);
-      border-left-color: var(--fill-color);
-    }
-    20% {
-      border-color: transparent;
-      border-left-color: var(--fill-color);
-      border-top-color: var(--fill-color);
-    }
-    30% {
-      border-color: transparent;
-      border-left-color: var(--fill-color);
-      border-top-color: var(--fill-color);
-      border-right-color: var(--fill-color);
-    }
-    40% {
-      border-color: transparent;
-      border-right-color: var(--fill-color);
-      border-top-color: var(--fill-color);
-    }
-    60% {
-      border-color: transparent;
-      border-right-color: var(--fill-color);
-    }
-    80% {
-      border-color: transparent;
-      border-right-color: var(--fill-color);
-      border-bottom-color: var(--fill-color);
-    }
-    90% {
-      border-color: transparent;
-      border-bottom-color: var(--fill-color);
-    }
-  }
-</style>
-
-      <script>
-        async function quickchart(key) {
-          const quickchartButtonEl =
-            document.querySelector('#' + key + ' button');
-          quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
-          quickchartButtonEl.classList.add('colab-df-spinner');
-          try {
-            const charts = await google.colab.kernel.invokeFunction(
-                'suggestCharts', [key], {});
-          } catch (error) {
-            console.error('Error during call to suggestCharts:', error);
-          }
-          quickchartButtonEl.classList.remove('colab-df-spinner');
-          quickchartButtonEl.classList.add('colab-df-quickchart-complete');
-        }
-        (() => {
-          let quickchartButtonEl =
-            document.querySelector('#df-fbaa072e-df5a-4f74-91c9-b7b3e57d23f5 button');
-          quickchartButtonEl.style.display =
-            google.colab.kernel.accessAllowed ? 'block' : 'none';
-        })();
-      </script>
-    </div>
-
-  <div id="id_116b72e3-726d-4943-9075-596160ff3430">
-    <style>
-      .colab-df-generate {
-        background-color: #E8F0FE;
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        display: none;
-        fill: #1967D2;
-        height: 32px;
-        padding: 0 0 0 0;
-        width: 32px;
-      }
-
-      .colab-df-generate:hover {
-        background-color: #E2EBFA;
-        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-        fill: #174EA6;
-      }
-
-      [theme=dark] .colab-df-generate {
-        background-color: #3B4455;
-        fill: #D2E3FC;
-      }
-
-      [theme=dark] .colab-df-generate:hover {
-        background-color: #434B5C;
-        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-        fill: #FFFFFF;
-      }
-    </style>
-    <button class="colab-df-generate" onclick="generateWithVariable('new_df')"
-            title="Generate code using this dataframe."
-            style="display:none;">
-
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-       width="24px">
-    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
-  </svg>
-    </button>
-    <script>
-      (() => {
-      const buttonEl =
-        document.querySelector('#id_116b72e3-726d-4943-9075-596160ff3430 button.colab-df-generate');
-      buttonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-      buttonEl.onclick = () => {
-        google.colab.notebook.generateWithVariable('new_df');
-      }
-      })();
-    </script>
-  </div>
-
-    </div>
-  </div>
-</div></div>
+</div></div></div>
 </div>
 </section>
-<section id="cek-missing-value-lagi">
-<h3>Cek Missing Value Lagi<a class="headerlink" href="#cek-missing-value-lagi" title="Link to this heading">#</a></h3>
+<section id="cek-ulang-missing-value">
+<h3>Cek Ulang Missing Value<a class="headerlink" href="#cek-ulang-missing-value" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">missing_count</span> <span class="o">=</span> <span class="n">new_df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -2003,9 +1138,7 @@ Successfully installed deprecated-1.2.18 openeo-0.45.0 pystac-1.14.1 shapely-2.1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">
-  <div id="df-9db001af-0f47-4c1c-b7ef-25de8a1d097a" class="colab-df-container">
-    <div>
+<div class="output text_html"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -2040,285 +1173,1135 @@ Successfully installed deprecated-1.2.18 openeo-0.45.0 pystac-1.14.1 shapely-2.1
     </tr>
   </tbody>
 </table>
+</div></div></div>
 </div>
-    <div class="colab-df-buttons">
+</section>
+</section>
+<section id="convert-menjadi-supervised-learning">
+<h2>Convert Menjadi Supervised Learning<a class="headerlink" href="#convert-menjadi-supervised-learning" title="Link to this heading">#</a></h2>
+<section id="inisialisasi-hari-ke-2-5">
+<h3>Inisialisasi hari ke 2 - 5<a class="headerlink" href="#inisialisasi-hari-ke-2-5" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h2</span> <span class="o">=</span> <span class="n">new_df</span>
+<span class="n">h3</span> <span class="o">=</span> <span class="n">new_df</span>
+<span class="n">h4</span> <span class="o">=</span> <span class="n">new_df</span>
+<span class="n">h5</span> <span class="o">=</span> <span class="n">new_df</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-supervised-h1-h2">
+<h3>Data Supervised h1 &amp; h2<a class="headerlink" href="#data-supervised-h1-h2" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h2</span> <span class="o">=</span> <span class="n">h2</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span>
+<span class="n">hari</span> <span class="o">=</span> <span class="mi">2</span>
 
-  <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-9db001af-0f47-4c1c-b7ef-25de8a1d097a')"
-            title="Convert this dataframe to an interactive table."
-            style="display:none;">
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">hari</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;h</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">h2</span><span class="p">[</span><span class="n">names</span><span class="p">]</span> <span class="o">=</span> <span class="n">h2</span><span class="p">[</span><span class="s1">&#39;NO2&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
-    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
-  </svg>
-    </button>
-
-  <style>
-    .colab-df-container {
-      display:flex;
-      gap: 12px;
+<span class="n">h2</span> <span class="o">=</span> <span class="n">h2</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">h2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
     }
 
-    .colab-df-convert {
-      background-color: #E8F0FE;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      display: none;
-      fill: #1967D2;
-      height: 32px;
-      padding: 0 0 0 0;
-      width: 32px;
+    .dataframe tbody tr th {
+        vertical-align: top;
     }
 
-    .colab-df-convert:hover {
-      background-color: #E2EBFA;
-      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-      fill: #174EA6;
+    .dataframe thead th {
+        text-align: right;
     }
-
-    .colab-df-buttons div {
-      margin-bottom: 4px;
-    }
-
-    [theme=dark] .colab-df-convert {
-      background-color: #3B4455;
-      fill: #D2E3FC;
-    }
-
-    [theme=dark] .colab-df-convert:hover {
-      background-color: #434B5C;
-      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-      fill: #FFFFFF;
-    }
-  </style>
-
-    <script>
-      const buttonEl =
-        document.querySelector('#df-9db001af-0f47-4c1c-b7ef-25de8a1d097a button.colab-df-convert');
-      buttonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-      async function convertToInteractive(key) {
-        const element = document.querySelector('#df-9db001af-0f47-4c1c-b7ef-25de8a1d097a');
-        const dataTable =
-          await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                    [key], {});
-        if (!dataTable) return;
-
-        const docLinkHtml = 'Like what you see? Visit the ' +
-          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
-          + ' to learn more about interactive tables.';
-        element.innerHTML = '';
-        dataTable['output_type'] = 'display_data';
-        await google.colab.output.renderOutput(dataTable, element);
-        const docLink = document.createElement('div');
-        docLink.innerHTML = docLinkHtml;
-        element.appendChild(docLink);
-      }
-    </script>
-  </div>
-
-
-    <div id="df-0794b952-e11c-49d4-a157-36b1007b968d">
-      <button class="colab-df-quickchart" onclick="quickchart('df-0794b952-e11c-49d4-a157-36b1007b968d')"
-                title="Suggest charts"
-                style="display:none;">
-
-<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-     width="24px">
-    <g>
-        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
-    </g>
-</svg>
-      </button>
-
-<style>
-  .colab-df-quickchart {
-      --bg-color: #E8F0FE;
-      --fill-color: #1967D2;
-      --hover-bg-color: #E2EBFA;
-      --hover-fill-color: #174EA6;
-      --disabled-fill-color: #AAA;
-      --disabled-bg-color: #DDD;
-  }
-
-  [theme=dark] .colab-df-quickchart {
-      --bg-color: #3B4455;
-      --fill-color: #D2E3FC;
-      --hover-bg-color: #434B5C;
-      --hover-fill-color: #FFFFFF;
-      --disabled-bg-color: #3B4455;
-      --disabled-fill-color: #666;
-  }
-
-  .colab-df-quickchart {
-    background-color: var(--bg-color);
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    display: none;
-    fill: var(--fill-color);
-    height: 32px;
-    padding: 0;
-    width: 32px;
-  }
-
-  .colab-df-quickchart:hover {
-    background-color: var(--hover-bg-color);
-    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
-    fill: var(--button-hover-fill-color);
-  }
-
-  .colab-df-quickchart-complete:disabled,
-  .colab-df-quickchart-complete:disabled:hover {
-    background-color: var(--disabled-bg-color);
-    fill: var(--disabled-fill-color);
-    box-shadow: none;
-  }
-
-  .colab-df-spinner {
-    border: 2px solid var(--fill-color);
-    border-color: transparent;
-    border-bottom-color: var(--fill-color);
-    animation:
-      spin 1s steps(1) infinite;
-  }
-
-  @keyframes spin {
-    0% {
-      border-color: transparent;
-      border-bottom-color: var(--fill-color);
-      border-left-color: var(--fill-color);
-    }
-    20% {
-      border-color: transparent;
-      border-left-color: var(--fill-color);
-      border-top-color: var(--fill-color);
-    }
-    30% {
-      border-color: transparent;
-      border-left-color: var(--fill-color);
-      border-top-color: var(--fill-color);
-      border-right-color: var(--fill-color);
-    }
-    40% {
-      border-color: transparent;
-      border-right-color: var(--fill-color);
-      border-top-color: var(--fill-color);
-    }
-    60% {
-      border-color: transparent;
-      border-right-color: var(--fill-color);
-    }
-    80% {
-      border-color: transparent;
-      border-right-color: var(--fill-color);
-      border-bottom-color: var(--fill-color);
-    }
-    90% {
-      border-color: transparent;
-      border-bottom-color: var(--fill-color);
-    }
-  }
 </style>
-
-      <script>
-        async function quickchart(key) {
-          const quickchartButtonEl =
-            document.querySelector('#' + key + ' button');
-          quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
-          quickchartButtonEl.classList.add('colab-df-spinner');
-          try {
-            const charts = await google.colab.kernel.invokeFunction(
-                'suggestCharts', [key], {});
-          } catch (error) {
-            console.error('Error during call to suggestCharts:', error);
-          }
-          quickchartButtonEl.classList.remove('colab-df-spinner');
-          quickchartButtonEl.classList.add('colab-df-quickchart-complete');
-        }
-        (() => {
-          let quickchartButtonEl =
-            document.querySelector('#df-0794b952-e11c-49d4-a157-36b1007b968d button');
-          quickchartButtonEl.style.display =
-            google.colab.kernel.accessAllowed ? 'block' : 'none';
-        })();
-      </script>
-    </div>
-
-  <div id="id_c4fc4a3c-5c12-4f11-b86c-e9ff5e59525f">
-    <style>
-      .colab-df-generate {
-        background-color: #E8F0FE;
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        display: none;
-        fill: #1967D2;
-        height: 32px;
-        padding: 0 0 0 0;
-        width: 32px;
-      }
-
-      .colab-df-generate:hover {
-        background-color: #E2EBFA;
-        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-        fill: #174EA6;
-      }
-
-      [theme=dark] .colab-df-generate {
-        background-color: #3B4455;
-        fill: #D2E3FC;
-      }
-
-      [theme=dark] .colab-df-generate:hover {
-        background-color: #434B5C;
-        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-        fill: #FFFFFF;
-      }
-    </style>
-    <button class="colab-df-generate" onclick="generateWithVariable('missing_table')"
-            title="Generate code using this dataframe."
-            style="display:none;">
-
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-       width="24px">
-    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
-  </svg>
-    </button>
-    <script>
-      (() => {
-      const buttonEl =
-        document.querySelector('#id_c4fc4a3c-5c12-4f11-b86c-e9ff5e59525f button.colab-df-generate');
-      buttonEl.style.display =
-        google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-      buttonEl.onclick = () => {
-        google.colab.notebook.generateWithVariable('missing_table');
-      }
-      })();
-    </script>
-  </div>
-
-    </div>
-  </div>
-</div></div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>NO2</th>
+      <th>h1</th>
+      <th>h2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.000202</td>
+      <td>0.000112</td>
+      <td>0.000112</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.000073</td>
+      <td>0.000202</td>
+      <td>0.000112</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.000043</td>
+      <td>0.000073</td>
+      <td>0.000202</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.000034</td>
+      <td>0.000043</td>
+      <td>0.000073</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.000026</td>
+      <td>0.000034</td>
+      <td>0.000043</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.000038</td>
+      <td>0.000026</td>
+      <td>0.000034</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.000047</td>
+      <td>0.000038</td>
+      <td>0.000026</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.000056</td>
+      <td>0.000047</td>
+      <td>0.000038</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.000066</td>
+      <td>0.000056</td>
+      <td>0.000047</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0.000040</td>
+      <td>0.000066</td>
+      <td>0.000056</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>0.000070</td>
+      <td>0.000040</td>
+      <td>0.000066</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>0.000039</td>
+      <td>0.000070</td>
+      <td>0.000040</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>0.000051</td>
+      <td>0.000039</td>
+      <td>0.000070</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>0.000081</td>
+      <td>0.000051</td>
+      <td>0.000039</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>0.000063</td>
+      <td>0.000081</td>
+      <td>0.000051</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>0.000119</td>
+      <td>0.000063</td>
+      <td>0.000081</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>0.000096</td>
+      <td>0.000119</td>
+      <td>0.000063</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>0.000053</td>
+      <td>0.000096</td>
+      <td>0.000119</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>0.000022</td>
+      <td>0.000053</td>
+      <td>0.000096</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>0.000011</td>
+      <td>0.000022</td>
+      <td>0.000053</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>0.000041</td>
+      <td>0.000011</td>
+      <td>0.000022</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>0.000033</td>
+      <td>0.000041</td>
+      <td>0.000011</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>0.000051</td>
+      <td>0.000033</td>
+      <td>0.000041</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>0.000050</td>
+      <td>0.000051</td>
+      <td>0.000033</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>0.000040</td>
+      <td>0.000050</td>
+      <td>0.000051</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>0.000034</td>
+      <td>0.000040</td>
+      <td>0.000050</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>0.000045</td>
+      <td>0.000034</td>
+      <td>0.000040</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>0.000056</td>
+      <td>0.000045</td>
+      <td>0.000034</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </section>
-<section id="konversi-menjadi-data-supervised-learning">
-<h3>Konversi menjadi Data Supervised Learning<a class="headerlink" href="#konversi-menjadi-data-supervised-learning" title="Link to this heading">#</a></h3>
+<section id="data-supervised-h1-h2-dan-h3">
+<h3>Data Supervised h1, h2, dan h3<a class="headerlink" href="#data-supervised-h1-h2-dan-h3" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h3</span> <span class="o">=</span> <span class="n">h3</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span>
+<span class="n">hari</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">hari</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;h</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">h3</span><span class="p">[</span><span class="n">names</span><span class="p">]</span> <span class="o">=</span> <span class="n">h3</span><span class="p">[</span><span class="s1">&#39;NO2&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+<span class="n">h3</span> <span class="o">=</span> <span class="n">h3</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">h3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>NO2</th>
+      <th>h1</th>
+      <th>h2</th>
+      <th>h3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.000073</td>
+      <td>0.000202</td>
+      <td>0.000112</td>
+      <td>0.000112</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.000043</td>
+      <td>0.000073</td>
+      <td>0.000202</td>
+      <td>0.000112</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.000034</td>
+      <td>0.000043</td>
+      <td>0.000073</td>
+      <td>0.000202</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.000026</td>
+      <td>0.000034</td>
+      <td>0.000043</td>
+      <td>0.000073</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.000038</td>
+      <td>0.000026</td>
+      <td>0.000034</td>
+      <td>0.000043</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.000047</td>
+      <td>0.000038</td>
+      <td>0.000026</td>
+      <td>0.000034</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.000056</td>
+      <td>0.000047</td>
+      <td>0.000038</td>
+      <td>0.000026</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.000066</td>
+      <td>0.000056</td>
+      <td>0.000047</td>
+      <td>0.000038</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.000040</td>
+      <td>0.000066</td>
+      <td>0.000056</td>
+      <td>0.000047</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0.000070</td>
+      <td>0.000040</td>
+      <td>0.000066</td>
+      <td>0.000056</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>0.000039</td>
+      <td>0.000070</td>
+      <td>0.000040</td>
+      <td>0.000066</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>0.000051</td>
+      <td>0.000039</td>
+      <td>0.000070</td>
+      <td>0.000040</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>0.000081</td>
+      <td>0.000051</td>
+      <td>0.000039</td>
+      <td>0.000070</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>0.000063</td>
+      <td>0.000081</td>
+      <td>0.000051</td>
+      <td>0.000039</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>0.000119</td>
+      <td>0.000063</td>
+      <td>0.000081</td>
+      <td>0.000051</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>0.000096</td>
+      <td>0.000119</td>
+      <td>0.000063</td>
+      <td>0.000081</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>0.000053</td>
+      <td>0.000096</td>
+      <td>0.000119</td>
+      <td>0.000063</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>0.000022</td>
+      <td>0.000053</td>
+      <td>0.000096</td>
+      <td>0.000119</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>0.000011</td>
+      <td>0.000022</td>
+      <td>0.000053</td>
+      <td>0.000096</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>0.000041</td>
+      <td>0.000011</td>
+      <td>0.000022</td>
+      <td>0.000053</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>0.000033</td>
+      <td>0.000041</td>
+      <td>0.000011</td>
+      <td>0.000022</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>0.000051</td>
+      <td>0.000033</td>
+      <td>0.000041</td>
+      <td>0.000011</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>0.000050</td>
+      <td>0.000051</td>
+      <td>0.000033</td>
+      <td>0.000041</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>0.000040</td>
+      <td>0.000050</td>
+      <td>0.000051</td>
+      <td>0.000033</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>0.000034</td>
+      <td>0.000040</td>
+      <td>0.000050</td>
+      <td>0.000051</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>0.000045</td>
+      <td>0.000034</td>
+      <td>0.000040</td>
+      <td>0.000050</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>0.000056</td>
+      <td>0.000045</td>
+      <td>0.000034</td>
+      <td>0.000040</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
 </section>
+<section id="data-supervised-h1-h2-h3-dan-h4">
+<h3>Data Supervised h1, h2, h3, dan h4<a class="headerlink" href="#data-supervised-h1-h2-h3-dan-h4" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h4</span> <span class="o">=</span> <span class="n">h4</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span>
+<span class="n">hari</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">hari</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;h</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">h4</span><span class="p">[</span><span class="n">names</span><span class="p">]</span> <span class="o">=</span> <span class="n">h4</span><span class="p">[</span><span class="s1">&#39;NO2&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+<span class="n">h4</span> <span class="o">=</span> <span class="n">h4</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">h4</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>NO2</th>
+      <th>h1</th>
+      <th>h2</th>
+      <th>h3</th>
+      <th>h4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.000043</td>
+      <td>0.000073</td>
+      <td>0.000202</td>
+      <td>0.000112</td>
+      <td>0.000112</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.000034</td>
+      <td>0.000043</td>
+      <td>0.000073</td>
+      <td>0.000202</td>
+      <td>0.000112</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.000026</td>
+      <td>0.000034</td>
+      <td>0.000043</td>
+      <td>0.000073</td>
+      <td>0.000202</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.000038</td>
+      <td>0.000026</td>
+      <td>0.000034</td>
+      <td>0.000043</td>
+      <td>0.000073</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.000047</td>
+      <td>0.000038</td>
+      <td>0.000026</td>
+      <td>0.000034</td>
+      <td>0.000043</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.000056</td>
+      <td>0.000047</td>
+      <td>0.000038</td>
+      <td>0.000026</td>
+      <td>0.000034</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.000066</td>
+      <td>0.000056</td>
+      <td>0.000047</td>
+      <td>0.000038</td>
+      <td>0.000026</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.000040</td>
+      <td>0.000066</td>
+      <td>0.000056</td>
+      <td>0.000047</td>
+      <td>0.000038</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.000070</td>
+      <td>0.000040</td>
+      <td>0.000066</td>
+      <td>0.000056</td>
+      <td>0.000047</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0.000039</td>
+      <td>0.000070</td>
+      <td>0.000040</td>
+      <td>0.000066</td>
+      <td>0.000056</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>0.000051</td>
+      <td>0.000039</td>
+      <td>0.000070</td>
+      <td>0.000040</td>
+      <td>0.000066</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>0.000081</td>
+      <td>0.000051</td>
+      <td>0.000039</td>
+      <td>0.000070</td>
+      <td>0.000040</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>0.000063</td>
+      <td>0.000081</td>
+      <td>0.000051</td>
+      <td>0.000039</td>
+      <td>0.000070</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>0.000119</td>
+      <td>0.000063</td>
+      <td>0.000081</td>
+      <td>0.000051</td>
+      <td>0.000039</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>0.000096</td>
+      <td>0.000119</td>
+      <td>0.000063</td>
+      <td>0.000081</td>
+      <td>0.000051</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>0.000053</td>
+      <td>0.000096</td>
+      <td>0.000119</td>
+      <td>0.000063</td>
+      <td>0.000081</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>0.000022</td>
+      <td>0.000053</td>
+      <td>0.000096</td>
+      <td>0.000119</td>
+      <td>0.000063</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>0.000011</td>
+      <td>0.000022</td>
+      <td>0.000053</td>
+      <td>0.000096</td>
+      <td>0.000119</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>0.000041</td>
+      <td>0.000011</td>
+      <td>0.000022</td>
+      <td>0.000053</td>
+      <td>0.000096</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>0.000033</td>
+      <td>0.000041</td>
+      <td>0.000011</td>
+      <td>0.000022</td>
+      <td>0.000053</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>0.000051</td>
+      <td>0.000033</td>
+      <td>0.000041</td>
+      <td>0.000011</td>
+      <td>0.000022</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>0.000050</td>
+      <td>0.000051</td>
+      <td>0.000033</td>
+      <td>0.000041</td>
+      <td>0.000011</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>0.000040</td>
+      <td>0.000050</td>
+      <td>0.000051</td>
+      <td>0.000033</td>
+      <td>0.000041</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>0.000034</td>
+      <td>0.000040</td>
+      <td>0.000050</td>
+      <td>0.000051</td>
+      <td>0.000033</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>0.000045</td>
+      <td>0.000034</td>
+      <td>0.000040</td>
+      <td>0.000050</td>
+      <td>0.000051</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>0.000056</td>
+      <td>0.000045</td>
+      <td>0.000034</td>
+      <td>0.000040</td>
+      <td>0.000050</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
 </section>
-<section id="data-preprocessing">
-<h2>Data Preprocessing<a class="headerlink" href="#data-preprocessing" title="Link to this heading">#</a></h2>
+<section id="data-supervised-h1-h2-h3-h4-dan-h5">
+<h3>Data Supervised h1, h2, h3, h4, dan h5<a class="headerlink" href="#data-supervised-h1-h2-h3-h4-dan-h5" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h5</span> <span class="o">=</span> <span class="n">h5</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span>
+<span class="n">hari</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">hari</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;h</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">h5</span><span class="p">[</span><span class="n">names</span><span class="p">]</span> <span class="o">=</span> <span class="n">h5</span><span class="p">[</span><span class="s1">&#39;NO2&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+<span class="n">h5</span> <span class="o">=</span> <span class="n">h5</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">h5</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>NO2</th>
+      <th>h1</th>
+      <th>h2</th>
+      <th>h3</th>
+      <th>h4</th>
+      <th>h5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.000034</td>
+      <td>0.000043</td>
+      <td>0.000073</td>
+      <td>0.000202</td>
+      <td>0.000112</td>
+      <td>0.000112</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.000026</td>
+      <td>0.000034</td>
+      <td>0.000043</td>
+      <td>0.000073</td>
+      <td>0.000202</td>
+      <td>0.000112</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.000038</td>
+      <td>0.000026</td>
+      <td>0.000034</td>
+      <td>0.000043</td>
+      <td>0.000073</td>
+      <td>0.000202</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.000047</td>
+      <td>0.000038</td>
+      <td>0.000026</td>
+      <td>0.000034</td>
+      <td>0.000043</td>
+      <td>0.000073</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.000056</td>
+      <td>0.000047</td>
+      <td>0.000038</td>
+      <td>0.000026</td>
+      <td>0.000034</td>
+      <td>0.000043</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.000066</td>
+      <td>0.000056</td>
+      <td>0.000047</td>
+      <td>0.000038</td>
+      <td>0.000026</td>
+      <td>0.000034</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.000040</td>
+      <td>0.000066</td>
+      <td>0.000056</td>
+      <td>0.000047</td>
+      <td>0.000038</td>
+      <td>0.000026</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.000070</td>
+      <td>0.000040</td>
+      <td>0.000066</td>
+      <td>0.000056</td>
+      <td>0.000047</td>
+      <td>0.000038</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.000039</td>
+      <td>0.000070</td>
+      <td>0.000040</td>
+      <td>0.000066</td>
+      <td>0.000056</td>
+      <td>0.000047</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0.000051</td>
+      <td>0.000039</td>
+      <td>0.000070</td>
+      <td>0.000040</td>
+      <td>0.000066</td>
+      <td>0.000056</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>0.000081</td>
+      <td>0.000051</td>
+      <td>0.000039</td>
+      <td>0.000070</td>
+      <td>0.000040</td>
+      <td>0.000066</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>0.000063</td>
+      <td>0.000081</td>
+      <td>0.000051</td>
+      <td>0.000039</td>
+      <td>0.000070</td>
+      <td>0.000040</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>0.000119</td>
+      <td>0.000063</td>
+      <td>0.000081</td>
+      <td>0.000051</td>
+      <td>0.000039</td>
+      <td>0.000070</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>0.000096</td>
+      <td>0.000119</td>
+      <td>0.000063</td>
+      <td>0.000081</td>
+      <td>0.000051</td>
+      <td>0.000039</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>0.000053</td>
+      <td>0.000096</td>
+      <td>0.000119</td>
+      <td>0.000063</td>
+      <td>0.000081</td>
+      <td>0.000051</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>0.000022</td>
+      <td>0.000053</td>
+      <td>0.000096</td>
+      <td>0.000119</td>
+      <td>0.000063</td>
+      <td>0.000081</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>0.000011</td>
+      <td>0.000022</td>
+      <td>0.000053</td>
+      <td>0.000096</td>
+      <td>0.000119</td>
+      <td>0.000063</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>0.000041</td>
+      <td>0.000011</td>
+      <td>0.000022</td>
+      <td>0.000053</td>
+      <td>0.000096</td>
+      <td>0.000119</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>0.000033</td>
+      <td>0.000041</td>
+      <td>0.000011</td>
+      <td>0.000022</td>
+      <td>0.000053</td>
+      <td>0.000096</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>0.000051</td>
+      <td>0.000033</td>
+      <td>0.000041</td>
+      <td>0.000011</td>
+      <td>0.000022</td>
+      <td>0.000053</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>0.000050</td>
+      <td>0.000051</td>
+      <td>0.000033</td>
+      <td>0.000041</td>
+      <td>0.000011</td>
+      <td>0.000022</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>0.000040</td>
+      <td>0.000050</td>
+      <td>0.000051</td>
+      <td>0.000033</td>
+      <td>0.000041</td>
+      <td>0.000011</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>0.000034</td>
+      <td>0.000040</td>
+      <td>0.000050</td>
+      <td>0.000051</td>
+      <td>0.000033</td>
+      <td>0.000041</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>0.000045</td>
+      <td>0.000034</td>
+      <td>0.000040</td>
+      <td>0.000050</td>
+      <td>0.000051</td>
+      <td>0.000033</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>0.000056</td>
+      <td>0.000045</td>
+      <td>0.000034</td>
+      <td>0.000040</td>
+      <td>0.000050</td>
+      <td>0.000051</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
 </section>
 <section id="data-modelling">
 <h2>Data Modelling<a class="headerlink" href="#data-modelling" title="Link to this heading">#</a></h2>
-<section id="modelling-menggunakan-k-nn-regression">
-<h3>Modelling menggunakan K-NN Regression<a class="headerlink" href="#modelling-menggunakan-k-nn-regression" title="Link to this heading">#</a></h3>
+<section id="modelling-data-h1-dan-h2-menggunakan-knn-regression">
+<h3>Modelling Data h1 dan h2 menggunakan KNN Regression<a class="headerlink" href="#modelling-data-h1-dan-h2-menggunakan-knn-regression" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">h2</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NO2&#39;</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">h2</span><span class="p">[</span><span class="s1">&#39;NO2&#39;</span><span class="p">]</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_train_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsRegressor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">h2_predict</span> <span class="o">=</span> <span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
+<span class="n">r2_h2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">h2_predict</span><span class="p">)</span>
+<span class="n">mse_h2</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">h2_predict</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MSE:&quot;</span><span class="p">,</span> <span class="n">mse_h2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;R2:&quot;</span><span class="p">,</span> <span class="n">r2_h2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 4.6376750021204813e-10
+R2: -0.6308064895930374
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="modelling-data-h1-h2-dan-h3-menggunakan-k-nn-regression">
+<h3>Modelling Data h1, h2, dan h3 menggunakan K-NN Regression<a class="headerlink" href="#modelling-data-h1-h2-dan-h3-menggunakan-k-nn-regression" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">h3</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NO2&#39;</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">h3</span><span class="p">[</span><span class="s1">&#39;NO2&#39;</span><span class="p">]</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_train_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsRegressor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">h3_predict</span> <span class="o">=</span> <span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
+<span class="n">r2_h3</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">h3_predict</span><span class="p">)</span>
+<span class="n">mse_h3</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">h3_predict</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MSE:&quot;</span><span class="p">,</span> <span class="n">mse_h3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;R2:&quot;</span><span class="p">,</span> <span class="n">r2_h3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 1.97403133698387e-10
+R2: -0.45674188622402334
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="modelling-data-h1-h2-h3-dan-h4-menggunakan-k-nn-regression">
+<h3>Modelling Data h1, h2, h3, dan h4 menggunakan K-NN Regression<a class="headerlink" href="#modelling-data-h1-h2-h3-dan-h4-menggunakan-k-nn-regression" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">h4</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NO2&#39;</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">h4</span><span class="p">[</span><span class="s1">&#39;NO2&#39;</span><span class="p">]</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_train_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsRegressor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">h4_predict</span> <span class="o">=</span> <span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
+<span class="n">r2_h4</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">h4_predict</span><span class="p">)</span>
+<span class="n">mse_h4</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">h4_predict</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MSE:&quot;</span><span class="p">,</span> <span class="n">mse_h4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;R2:&quot;</span><span class="p">,</span> <span class="n">r2_h4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 5.837924476384045e-10
+R2: -0.5090776902431453
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="modelling-data-h1-h2-h3-h4-dan-h5-menggunakan-k-nn-regression">
+<h3>Modelling Data h1 h2, h3,h4, dan h5 menggunakan K-NN Regression<a class="headerlink" href="#modelling-data-h1-h2-h3-h4-dan-h5-menggunakan-k-nn-regression" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">h5</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NO2&#39;</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">h5</span><span class="p">[</span><span class="s1">&#39;NO2&#39;</span><span class="p">]</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_train_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsRegressor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">h5_predict</span> <span class="o">=</span> <span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
+<span class="n">r2_h5</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">h5_predict</span><span class="p">)</span>
+<span class="n">mse_h5</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">h5_predict</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MSE:&quot;</span><span class="p">,</span> <span class="n">mse_h5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;R2:&quot;</span><span class="p">,</span> <span class="n">r2_h5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE: 4.6376750021204813e-10
+R2: -0.6308064895930374
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 </section>
@@ -2384,14 +2367,26 @@ Successfully installed deprecated-1.2.18 openeo-0.45.0 pystac-1.14.1 shapely-2.1
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baca-dataset">Baca Dataset</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deteksi-missing-value">Deteksi Missing Value</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-no2">Visualisasi NO2</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tangani-missing-value-dengan-interpolasi">Tangani Missing Value dengan Interpolasi</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cek-missing-value-lagi">Cek Missing Value Lagi</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#konversi-menjadi-data-supervised-learning">Konversi menjadi Data Supervised Learning</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data Preprocessing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tangani-missing-value-dengan-interpolasi">Tangani Missing Value dengan Interpolasi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cek-ulang-missing-value">Cek Ulang Missing Value</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-menjadi-supervised-learning">Convert Menjadi Supervised Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inisialisasi-hari-ke-2-5">Inisialisasi hari ke 2 - 5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-supervised-h1-h2">Data Supervised h1 &amp; h2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-supervised-h1-h2-dan-h3">Data Supervised h1, h2, dan h3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-supervised-h1-h2-h3-dan-h4">Data Supervised h1, h2, h3, dan h4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-supervised-h1-h2-h3-h4-dan-h5">Data Supervised h1, h2, h3, h4, dan h5</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-modelling">Data Modelling</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-menggunakan-k-nn-regression">Modelling menggunakan K-NN Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-data-h1-dan-h2-menggunakan-knn-regression">Modelling Data h1 dan h2 menggunakan KNN Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-data-h1-h2-dan-h3-menggunakan-k-nn-regression">Modelling Data h1, h2, dan h3 menggunakan K-NN Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-data-h1-h2-h3-dan-h4-menggunakan-k-nn-regression">Modelling Data h1, h2, h3, dan h4 menggunakan K-NN Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-data-h1-h2-h3-h4-dan-h5-menggunakan-k-nn-regression">Modelling Data h1 h2, h3,h4, dan h5 menggunakan K-NN Regression</a></li>
 </ul>
 </li>
 </ul>
