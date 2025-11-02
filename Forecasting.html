@@ -485,10 +485,10 @@ Requirement already satisfied: urllib3&gt;=1.9.0 in /home/codespace/.local/lib/p
 Requirement already satisfied: shapely&gt;=1.6.4 in /usr/local/python/3.12.1/lib/python3.12/site-packages (from openeo) (2.1.2)
 Requirement already satisfied: pystac&gt;=1.5.0 in /usr/local/python/3.12.1/lib/python3.12/site-packages (from openeo) (1.14.1)
 Requirement already satisfied: deprecated&gt;=1.2.12 in /usr/local/python/3.12.1/lib/python3.12/site-packages (from openeo) (1.2.18)
+Requirement already satisfied: wrapt&lt;2,&gt;=1.10 in /usr/local/python/3.12.1/lib/python3.12/site-packages (from deprecated&gt;=1.2.12-&gt;openeo) (1.17.3)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: wrapt&lt;2,&gt;=1.10 in /usr/local/python/3.12.1/lib/python3.12/site-packages (from deprecated&gt;=1.2.12-&gt;openeo) (1.17.3)
-Requirement already satisfied: six&gt;=1.5 in /home/codespace/.local/lib/python3.12/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas) (1.17.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: six&gt;=1.5 in /home/codespace/.local/lib/python3.12/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas) (1.17.0)
 Requirement already satisfied: charset_normalizer&lt;4,&gt;=2 in /home/codespace/.local/lib/python3.12/site-packages (from requests&gt;=2.26.0-&gt;openeo) (3.4.2)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/codespace/.local/lib/python3.12/site-packages (from requests&gt;=2.26.0-&gt;openeo) (3.10)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /home/codespace/.local/lib/python3.12/site-packages (from requests&gt;=2.26.0-&gt;openeo) (2025.7.9)
@@ -610,13 +610,13 @@ Requirement already satisfied: certifi&gt;=2017.4.17 in /home/codespace/.local/l
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Authenticated using refresh token.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0:00:00 Job &#39;j-2511021112574ced8b740f1f4fa3e6da&#39;: send &#39;start&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0:00:00 Job &#39;j-25110212581446c9958ba27be4bae286&#39;: send &#39;start&#39;
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0:00:13 Job &#39;j-2511021112574ced8b740f1f4fa3e6da&#39;: queued (progress 0%)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0:00:13 Job &#39;j-25110212581446c9958ba27be4bae286&#39;: created (progress 0%)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0:00:19 Job &#39;j-2511021112574ced8b740f1f4fa3e6da&#39;: queued (progress 0%)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0:00:19 Job &#39;j-25110212581446c9958ba27be4bae286&#39;: created (progress 0%)
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
@@ -2212,7 +2212,7 @@ R2: 0.14528612960538678
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MAPE h2: 0.34 %
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MAPE h2: 33.87 %
 </pre></div>
 </div>
 </div>
@@ -2287,7 +2287,7 @@ R²: -0.3392590607237984
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MAPE h3: 0.19 %
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MAPE h3: 18.52 %
 </pre></div>
 </div>
 </div>
@@ -2361,7 +2361,7 @@ R²: -0.5688276864581683
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MAPE h4: 0.55 %
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MAPE h4: 54.70 %
 </pre></div>
 </div>
 </div>
@@ -2435,7 +2435,7 @@ R²: -0.9263146495531278
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MAPE h5: 0.98 %
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MAPE h5: 98.27 %
 </pre></div>
 </div>
 </div>
@@ -2525,15 +2525,15 @@ R²: -0.9263146495531278
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data yang Digunakan untuk Chart (Urutan Eksekusi):
-| Lag   |   MAPE |
-|:------|-------:|
-| h1-h2 | 0.3387 |
-| h1-h3 | 0.1852 |
-| h1-h4 | 0.5470 |
-| h1-h5 | 0.9827 |
+| Lag   |    MAPE |
+|:------|--------:|
+| h1-h2 | 33.8674 |
+| h1-h3 | 18.5151 |
+| h1-h4 | 54.7003 |
+| h1-h5 | 98.2664 |
 </pre></div>
 </div>
-<img alt="_images/6dede0664e6f1ec9c7ba93a36793a81fbc2589f3407184b653822129bcd3055b.png" src="_images/6dede0664e6f1ec9c7ba93a36793a81fbc2589f3407184b653822129bcd3055b.png" />
+<img alt="_images/a46bfa829e915ddd307b970aab5944b1e38cad74b6fa9d23f61c527c13073c40.png" src="_images/a46bfa829e915ddd307b970aab5944b1e38cad74b6fa9d23f61c527c13073c40.png" />
 </div>
 </div>
 <p>Dari hasil ini lag 3 hari adalah model yang terbaik</p>
