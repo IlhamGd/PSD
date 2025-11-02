@@ -424,11 +424,14 @@ document.write(`
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-nilai-r2">Perbandingan nilai R2</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-mape-tiap-lag">Perbandingan MAPE tiap lag</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-prediksi-hari-berikutnya">Hasil prediksi hari berikutnya</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-prediksi-hari-berikutnya">Hasil prediksi hari berikutnya</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cek-apakah-kadar-no2-hari-berikutnya-baik-atau-tidak-baik">Cek apakah kadar NO2 hari berikutnya baik atau tidak baik</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment-menggunakan-strimlit">Deployment Menggunakan Strimlit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment-menggunakan-streamlit">Deployment Menggunakan Streamlit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-deploy">Hasil Deploy</a></li>
 </ul>
             </nav>
         </div>
@@ -477,14 +480,14 @@ Requirement already satisfied: packaging&gt;=23.2 in /home/codespace/.local/lib/
 Requirement already satisfied: python-dateutil&gt;=2.8.2 in /home/codespace/.local/lib/python3.12/site-packages (from pandas) (2.9.0.post0)
 Requirement already satisfied: pytz&gt;=2020.1 in /home/codespace/.local/lib/python3.12/site-packages (from pandas) (2025.2)
 Requirement already satisfied: tzdata&gt;=2022.7 in /home/codespace/.local/lib/python3.12/site-packages (from pandas) (2025.2)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: requests&gt;=2.26.0 in /home/codespace/.local/lib/python3.12/site-packages (from openeo) (2.32.4)
+Requirement already satisfied: requests&gt;=2.26.0 in /home/codespace/.local/lib/python3.12/site-packages (from openeo) (2.32.4)
 Requirement already satisfied: urllib3&gt;=1.9.0 in /home/codespace/.local/lib/python3.12/site-packages (from openeo) (2.5.0)
 Requirement already satisfied: shapely&gt;=1.6.4 in /usr/local/python/3.12.1/lib/python3.12/site-packages (from openeo) (2.1.2)
 Requirement already satisfied: pystac&gt;=1.5.0 in /usr/local/python/3.12.1/lib/python3.12/site-packages (from openeo) (1.14.1)
 Requirement already satisfied: deprecated&gt;=1.2.12 in /usr/local/python/3.12.1/lib/python3.12/site-packages (from openeo) (1.2.18)
-Requirement already satisfied: wrapt&lt;2,&gt;=1.10 in /usr/local/python/3.12.1/lib/python3.12/site-packages (from deprecated&gt;=1.2.12-&gt;openeo) (1.17.3)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: wrapt&lt;2,&gt;=1.10 in /usr/local/python/3.12.1/lib/python3.12/site-packages (from deprecated&gt;=1.2.12-&gt;openeo) (1.17.3)
 Requirement already satisfied: six&gt;=1.5 in /home/codespace/.local/lib/python3.12/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas) (1.17.0)
 Requirement already satisfied: charset_normalizer&lt;4,&gt;=2 in /home/codespace/.local/lib/python3.12/site-packages (from requests&gt;=2.26.0-&gt;openeo) (3.4.2)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/codespace/.local/lib/python3.12/site-packages (from requests&gt;=2.26.0-&gt;openeo) (3.10)
@@ -607,13 +610,13 @@ Requirement already satisfied: certifi&gt;=2017.4.17 in /home/codespace/.local/l
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Authenticated using refresh token.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0:00:00 Job &#39;j-25110209542944f68819d2cf054c9ca0&#39;: send &#39;start&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0:00:00 Job &#39;j-2511021112574ced8b740f1f4fa3e6da&#39;: send &#39;start&#39;
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0:00:13 Job &#39;j-25110209542944f68819d2cf054c9ca0&#39;: created (progress 0%)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0:00:13 Job &#39;j-2511021112574ced8b740f1f4fa3e6da&#39;: queued (progress 0%)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0:00:19 Job &#39;j-25110209542944f68819d2cf054c9ca0&#39;: created (progress 0%)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0:00:19 Job &#39;j-2511021112574ced8b740f1f4fa3e6da&#39;: queued (progress 0%)
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
@@ -2535,8 +2538,9 @@ R²: -0.9263146495531278
 </div>
 <p>Dari hasil ini lag 3 hari adalah model yang terbaik</p>
 </section>
+</section>
 <section id="hasil-prediksi-hari-berikutnya">
-<h3>Hasil prediksi hari berikutnya<a class="headerlink" href="#hasil-prediksi-hari-berikutnya" title="Link to this heading">#</a></h3>
+<h2>Hasil prediksi hari berikutnya<a class="headerlink" href="#hasil-prediksi-hari-berikutnya" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- Prediksi Hari Berikutnya (Versi Perbaikan) ---</span>
@@ -2581,7 +2585,6 @@ Prediksi konsentrasi NO2 untuk hari berikutnya adalah: 0.00003765
 </div>
 </div>
 </div>
-</section>
 <section id="cek-apakah-kadar-no2-hari-berikutnya-baik-atau-tidak-baik">
 <h3>Cek apakah kadar NO2 hari berikutnya baik atau tidak baik<a class="headerlink" href="#cek-apakah-kadar-no2-hari-berikutnya-baik-atau-tidak-baik" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
@@ -2616,7 +2619,7 @@ Prediksi konsentrasi NO2 untuk hari berikutnya adalah: 0.00003765
 
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">-------------------------------------------------&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Kategori Prediksi : **</span><span class="si">{</span><span class="n">kategori</span><span class="si">}</span><span class="s2">**&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Penjelasan</span><span class="se">\t\t</span><span class="s2">  : </span><span class="si">{</span><span class="n">penjelasan</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Penjelasan: </span><span class="si">{</span><span class="n">penjelasan</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-------------------------------------------------&quot;</span><span class="p">)</span>
 
 <span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
@@ -2633,7 +2636,7 @@ Kuantil Atas (Batas &#39;Sedang&#39;)	: 0.00006864 mol/m^2
 
 -------------------------------------------------
 Kategori Prediksi : **Baik**
-Penjelasan		  : Nilai ini berada di bawah atau sama dengan batas baik.
+Penjelasan: Nilai ini berada di bawah atau sama dengan batas baik.
 -------------------------------------------------
 </pre></div>
 </div>
@@ -2641,8 +2644,8 @@ Penjelasan		  : Nilai ini berada di bawah atau sama dengan batas baik.
 </div>
 </section>
 </section>
-<section id="deployment-menggunakan-strimlit">
-<h2>Deployment Menggunakan Strimlit<a class="headerlink" href="#deployment-menggunakan-strimlit" title="Link to this heading">#</a></h2>
+<section id="deployment-menggunakan-streamlit">
+<h2>Deployment Menggunakan Streamlit<a class="headerlink" href="#deployment-menggunakan-streamlit" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;no2_data.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -2678,33 +2681,49 @@ Penjelasan		  : Nilai ini berada di bawah atau sama dengan batas baik.
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-
 
 <span class="k">try</span><span class="p">:</span>
-    <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">knn_h3</span><span class="p">,</span> <span class="s1">&#39;knn_model.joblib&#39;</span><span class="p">)</span>
-    <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">scaler_h3</span><span class="p">,</span> <span class="s1">&#39;scaler.joblib&#39;</span><span class="p">)</span>
-    <span class="n">new_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;no2_data.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="c1"># --- Ekspor Model h2 ---</span>
+    <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">knn_h2</span><span class="p">,</span> <span class="s1">&#39;knn_model_h2.joblib&#39;</span><span class="p">)</span>
+    <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">scaler_h2</span><span class="p">,</span> <span class="s1">&#39;scaler_h2.joblib&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># --- Ekspor Model h3 ---</span>
+    <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">knn_h3</span><span class="p">,</span> <span class="s1">&#39;knn_model_h3.joblib&#39;</span><span class="p">)</span>
+    <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">scaler_h3</span><span class="p">,</span> <span class="s1">&#39;scaler_h3.joblib&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># --- Ekspor Model h4 ---</span>
+    <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">knn_h4</span><span class="p">,</span> <span class="s1">&#39;knn_model_h4.joblib&#39;</span><span class="p">)</span>
+    <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">scaler_h4</span><span class="p">,</span> <span class="s1">&#39;scaler_h4.joblib&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># --- Ekspor Model h5 ---</span>
+    <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">knn_h5</span><span class="p">,</span> <span class="s1">&#39;knn_model_h5.joblib&#39;</span><span class="p">)</span>
+    <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">scaler_h5</span><span class="p">,</span> <span class="s1">&#39;scaler_h5.joblib&#39;</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;BERHASIL! 8 file model/scaler telah diekspor.&quot;</span><span class="p">)</span>
+    <span class="c1"># (Pastikan no2_data.csv juga sudah diekspor)</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;BERHASIL! 3 file telah dibuat:&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;1. knn_model.joblib&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2. scaler.joblib&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;3. no2_data.csv&quot;</span><span class="p">)</span>
-
-<span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--- ERROR ---&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">NameError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;--- ERROR ---&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Variabel tidak ditemukan: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pastikan Anda sudah menjalankan semua cell modelling (h2-h5) dan&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;nama variabelnya adalah knn_h2, scaler_h2, knn_h3, scaler_h3, dst.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BERHASIL! 3 file telah dibuat:
-1. knn_model.joblib
-2. scaler.joblib
-3. no2_data.csv
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BERHASIL! 8 file model/scaler telah diekspor.
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="hasil-deploy">
+<h2>Hasil Deploy<a class="headerlink" href="#hasil-deploy" title="Link to this heading">#</a></h2>
+<p>Hasil deploy bisa di akses melalui tautan <a class="reference external" href="https://forecastingno2.streamlit.app/">https://forecastingno2.streamlit.app/</a>, didalamnya terdapat</p>
+<ul class="simple">
+<li><p>Hasil prediksi NO2 otomatis di wilayah Gresik dan sekitarnya</p></li>
+<li><p>Prediksi NO2 Manual (input) di wilayah Gresik dan sekitarnya</p></li>
+</ul>
 </section>
 </section>
 
@@ -2805,11 +2824,14 @@ Penjelasan		  : Nilai ini berada di bawah atau sama dengan batas baik.
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-nilai-r2">Perbandingan nilai R2</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-mape-tiap-lag">Perbandingan MAPE tiap lag</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-prediksi-hari-berikutnya">Hasil prediksi hari berikutnya</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-prediksi-hari-berikutnya">Hasil prediksi hari berikutnya</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cek-apakah-kadar-no2-hari-berikutnya-baik-atau-tidak-baik">Cek apakah kadar NO2 hari berikutnya baik atau tidak baik</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment-menggunakan-strimlit">Deployment Menggunakan Strimlit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment-menggunakan-streamlit">Deployment Menggunakan Streamlit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-deploy">Hasil Deploy</a></li>
 </ul>
   </nav></div>
 
