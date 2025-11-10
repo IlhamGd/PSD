@@ -60,6 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Deteksi_Voice';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Aplikasi Deteksi Suara Buka Tutup" href="voice.html" />
     <link rel="prev" title="FORECASTING" href="Forecasting.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -187,7 +188,10 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="Forecasting.html"><strong>FORECASTING</strong></a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Deteksi suara</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Deteksi suara</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="voice.html"><strong>Aplikasi Deteksi Suara Buka Tutup</strong></a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -432,15 +436,23 @@ Requirement already satisfied: soxr&gt;=0.3.2 in /usr/local/python/3.12.1/lib/py
 Requirement already satisfied: typing_extensions&gt;=4.1.1 in /home/codespace/.local/lib/python3.12/site-packages (from librosa) (4.14.1)
 Requirement already satisfied: lazy_loader&gt;=0.1 in /usr/local/python/3.12.1/lib/python3.12/site-packages (from librosa) (0.4)
 Requirement already satisfied: msgpack&gt;=1.0 in /usr/local/python/3.12.1/lib/python3.12/site-packages (from librosa) (1.1.2)
-Requirement already satisfied: packaging in /home/codespace/.local/lib/python3.12/site-packages (from lazy_loader&gt;=0.1-&gt;librosa) (25.0)
-Requirement already satisfied: llvmlite&lt;0.46,&gt;=0.45.0dev0 in /usr/local/python/3.12.1/lib/python3.12/site-packages (from numba&gt;=0.51.0-&gt;librosa) (0.45.1)
-Requirement already satisfied: platformdirs&gt;=2.5.0 in /home/codespace/.local/lib/python3.12/site-packages (from pooch&gt;=1.1-&gt;librosa) (4.3.8)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: packaging in /home/codespace/.local/lib/python3.12/site-packages (from lazy_loader&gt;=0.1-&gt;librosa) (25.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: llvmlite&lt;0.46,&gt;=0.45.0dev0 in /usr/local/python/3.12.1/lib/python3.12/site-packages (from numba&gt;=0.51.0-&gt;librosa) (0.45.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: platformdirs&gt;=2.5.0 in /home/codespace/.local/lib/python3.12/site-packages (from pooch&gt;=1.1-&gt;librosa) (4.3.8)
 Requirement already satisfied: requests&gt;=2.19.0 in /home/codespace/.local/lib/python3.12/site-packages (from pooch&gt;=1.1-&gt;librosa) (2.32.4)
 Requirement already satisfied: charset_normalizer&lt;4,&gt;=2 in /home/codespace/.local/lib/python3.12/site-packages (from requests&gt;=2.19.0-&gt;pooch&gt;=1.1-&gt;librosa) (3.4.2)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/codespace/.local/lib/python3.12/site-packages (from requests&gt;=2.19.0-&gt;pooch&gt;=1.1-&gt;librosa) (3.10)
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/codespace/.local/lib/python3.12/site-packages (from requests&gt;=2.19.0-&gt;pooch&gt;=1.1-&gt;librosa) (2.5.0)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /home/codespace/.local/lib/python3.12/site-packages (from requests&gt;=2.19.0-&gt;pooch&gt;=1.1-&gt;librosa) (2025.7.9)
-Requirement already satisfied: threadpoolctl&gt;=3.1.0 in /home/codespace/.local/lib/python3.12/site-packages (from scikit-learn&gt;=1.1.0-&gt;librosa) (3.6.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: threadpoolctl&gt;=3.1.0 in /home/codespace/.local/lib/python3.12/site-packages (from scikit-learn&gt;=1.1.0-&gt;librosa) (3.6.0)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: cffi&gt;=1.0 in /home/codespace/.local/lib/python3.12/site-packages (from soundfile&gt;=0.12.1-&gt;librosa) (1.17.1)
@@ -552,8 +564,9 @@ Requirement already satisfied: pycparser in /home/codespace/.local/lib/python3.1
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mulai memproses folder &#39;tutup&#39;...
-
---- Selesai! ---
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Selesai! ---
 Berhasil memproses 20 file audio.
 File &#39;fitur_audio.csv&#39; telah disimpan di: /workspaces/PSD/psd/voice/fitur_audio.csv
 
@@ -733,6 +746,8 @@ Encoder berhasil disimpan di: /workspaces/PSD/psd/voice/audio_encoder.joblib
 <h2>Hasil Deploy<a class="headerlink" href="#hasil-deploy" title="Link to this heading">#</a></h2>
 <p>Bisa diakses melalui <a class="reference external" href="https://voice-deteksi.streamlit.app/">https://voice-deteksi.streamlit.app/</a></p>
 </section>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -773,6 +788,15 @@ Encoder berhasil disimpan di: /workspaces/PSD/psd/voice/audio_encoder.joblib
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title"><strong>FORECASTING</strong></p>
       </div>
+    </a>
+    <a class="right-next"
+       href="voice.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Aplikasi Deteksi Suara Buka Tutup</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
